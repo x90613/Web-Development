@@ -58,7 +58,11 @@ function App() {
   const deleteTodo = async(id: string) => {
     await deleteTodoById(id)
     init();
-    //setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const editTodo = async(id: string, todo:TodoData) => {
+    await updateTodoStatus(id, todo);
+    init();
   };
 
   async function getTodos() {
@@ -76,6 +80,10 @@ function App() {
     return response.data;
   }
   
+  async function updateTodoStatus(id:string, todo:TodoData) {
+    const response = await instance.put(`/todos/${id}`, todo);
+    return response.data;
+  }
 
   return (
     <>
@@ -115,6 +123,7 @@ function App() {
             tag={todo.tag}
             mood={todo.mood}
             description={todo.description}
+            onEdit={() => editTodo(todo.id, todo)}
             onDelete={() => deleteTodo(todo.id)}
           />
         ))}

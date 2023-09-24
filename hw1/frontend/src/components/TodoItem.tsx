@@ -5,6 +5,7 @@ type TodoItemProps = {
   tag: string;
   mood: string;
   description: string;
+  onEdit: () => void;
   onDelete: () => void;
 };
 
@@ -13,6 +14,7 @@ export default function TodoItem({
   tag,
   mood,
   description,
+  onEdit,
   onDelete,
 }: TodoItemProps) {
   return (
@@ -24,6 +26,9 @@ export default function TodoItem({
         <p>{date}</p>
         <p>{tag}</p>
         <p>{mood}</p>
+        <button className="edit-todo" onClick={onEdit}>
+          edit
+        </button>
         <button className="delete-todo" onClick={onDelete}>
           delete
         </button>
