@@ -9,8 +9,9 @@ const instance = axios.create({
   baseURL: "http://localhost:8000/api",
 });
 
-type TodoData = {
-  id: string;
+
+export type TodoData = {
+  id?: string;
   date: string;
   tag: string;
   mood: string;
@@ -24,7 +25,6 @@ function App() {
   const [todoMood, setTodoMood] = useState("快樂");
   const [todoDescription, setTodoDescription] = useState("");
 
-  //function getName
 
   async function init() {
     try{
@@ -60,8 +60,9 @@ function App() {
     init();
   };
 
-  const editTodo = async(id: string, todo:TodoData) => {
-    await updateTodoStatus(id, todo);
+  const completeTodo = async(id: string, todo:TodoData) => {
+    console.log("enter");
+    await updateTodoStatus(id, todo); 
     init();
   };
 
@@ -123,8 +124,10 @@ function App() {
             tag={todo.tag}
             mood={todo.mood}
             description={todo.description}
-            onEdit={() => editTodo(todo.id, todo)}
-            onDelete={() => deleteTodo(todo.id)}
+            onComplete={(newTodo:TodoData) => {
+              console.log("123");
+              completeTodo(todo.id!, newTodo)}}
+            onDelete={() => deleteTodo(todo.id!)}
           />
         ))}
       </section>
