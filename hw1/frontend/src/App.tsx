@@ -11,16 +11,20 @@ const instance = axios.create({
 
 type TodoData = {
   id: string;
-  title: string;
   date: string;
+  tag: string;
+  mood: string;
   description: string;
 };
 
 function App() {
   const [todos, setTodos] = useState<TodoData[]>([]);
-  const [todoDate, setTodoDate] = useState(new Date().toString());
-  const [todoTitle, setTodoTitle] = useState("");
+  const [todoDate, setTodoDate] = useState("2023-09-01");
+  const [todoTag, setTodoTag] = useState("學業");
+  const [todoMood, setTodoMood] = useState("快樂");
   const [todoDescription, setTodoDescription] = useState("");
+
+  //function getName
 
   async function init() {
     try{
@@ -30,7 +34,6 @@ function App() {
       alert("Failed to load todos");
     }
   }
-  init()
 
   useEffect(() => {
     init();
@@ -45,14 +48,10 @@ function App() {
       alert("Please enter a description for your todo.");
       return;
     }
-    // setTodos([
-    //   ...todos,
-    //   { id: uuidv4(), title: todoTitle, description: todoDescription },
-    // ]);
-    const queryReq = { id: uuidv4(), title: todoTitle, date: todoDate, description: todoDescription };
+    const queryReq = { id: uuidv4(), date: todoDate, tag: todoTag, mood: todoMood, description: todoDescription };
+    //console.log(queryReq);
     await createTodo(queryReq);
     init(); //重新getAllData
-    setTodoTitle("");
     setTodoDescription("");
   };
 
@@ -85,14 +84,18 @@ function App() {
         <input id="date" type="date" value={todoDate}
           onChange={(e) => setTodoDate(e.target.value)}
         />
-        <input
-          type="text"
-          id="todo-input"
-          placeholder="new todo"
-          tabIndex={1}
-          value={todoTitle}
-          onChange={(e) => setTodoTitle(e.target.value)}
-        />
+        <select className="form-select" aria-label="Default select example"
+          value={todoTag} onChange={(e) => setTodoTag(e.target.value)}>
+        <option defaultValue="學業">學業</option>
+        <option value="人際">人際</option>
+        <option value="社團">社團</option>
+        </select>
+        <select className="form-select" aria-label="Default select example"
+          value={todoMood} onChange={(e) => setTodoMood(e.target.value)}>
+        <option defaultValue="快樂">快樂</option>
+        <option value="生氣">生氣</option>
+        <option value="難過">難過</option>
+        </select>
         <button id="todo-add" tabIndex={3} onClick={addTodo}>
           add
         </button>
@@ -108,8 +111,9 @@ function App() {
         {todos.map((todo) => (
           <TodoItem
             key={todo.id}
-            title={todo.title}
             date={todo.date}
+            tag={todo.tag}
+            mood={todo.mood}
             description={todo.description}
             onDelete={() => deleteTodo(todo.id)}
           />

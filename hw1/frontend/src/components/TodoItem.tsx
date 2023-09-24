@@ -1,27 +1,29 @@
 import "./todo-item.css";
 
 type TodoItemProps = {
-  title: string;
   date: string;
+  tag: string;
+  mood: string;
   description: string;
   onDelete: () => void;
 };
 
 export default function TodoItem({
-  title,
   date,
+  tag,
+  mood,
   description,
   onDelete,
 }: TodoItemProps) {
   return (
     <details className="todo-item">
       <summary>
-        <div>
+        {/*<div>
           <input type="checkbox" />
-          <p className="todo-title">{title}</p>
-          <p className="todo-title">{date}</p>
-        </div>
+        </div>*/}
         <p>{date}</p>
+        <p>{tag}</p>
+        <p>{mood}</p>
         <button className="delete-todo" onClick={onDelete}>
           delete
         </button>

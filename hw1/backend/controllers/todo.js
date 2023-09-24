@@ -21,10 +21,10 @@ export const getTodos = async (req, res) => {
 };
 // Create a todo
 export const createTodo = async (req, res) => {
-  const { title, date, description } = req.body;
+  const { date, tag, mood, description } = req.body;
 
   // Check title and description
-  if (!title || !description) {
+  if (!description) {
     return res
       .status(400)
       .json({ message: "Title and description are required!" });
@@ -33,8 +33,9 @@ export const createTodo = async (req, res) => {
   // Create a new todo
   try {
     const newTodo = await TodoModel.create({
-      title,
       date,
+      tag,
+      mood,
       description,
       completed: false,
     });

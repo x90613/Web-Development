@@ -3,11 +3,15 @@ import mongoose from "mongoose";
 // Create a schema
 const todoSchema = new mongoose.Schema(
   {
-    title: {
+    date: {
       type: String,
       required: true,
     },
-    date: {
+    tag: {
+      type: String,
+      required: true,
+    },
+    mood: {
       type: String,
       required: true,
     },
