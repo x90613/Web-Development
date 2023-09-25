@@ -32,3 +32,28 @@ textarea#todo-description-input {
   padding: 0 2rem;
   gap: 1rem;
 }
+
+p {
+  display: inline;
+}
+
+.filterWrapper {
+  padding-top: 20px;
+  display: flex;
+  /* 平行 */
+  justify-content: center; 
+  height: 30px;
+  /* 垂直 */
+  align-items: center;
+}
+
+.filterWrapper p{
+  font-size: 25px;
+  font-weight: 800;
+  margin-left: 10px;
+  color: darkorange;
+}
+
+.filterWrapper select{
+  margin-left: 5px;
+}

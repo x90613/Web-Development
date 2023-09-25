@@ -42,7 +42,7 @@
   width: 1.25rem;
   cursor: pointer;
 }
-.todo-item button {
+.todo-item .delete-todo {
   font-size: 1rem;
   border-radius: 999px;
   padding: 0.5rem;
@@ -51,7 +51,20 @@
   background-color: #f55;
   color: #fff;
 }
-.todo-item button:hover {
+.todo-item .delete-todo:hover {
   background-color: #f77;
 }
 
+
+.todo-item .edit-todo {
+  font-size: 1rem;
+  border-radius: 999px;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(39, 182, 132);
+  color: #fff;
+}
+.todo-item .edit-todo:hover {
+  background-color: rgb(10, 94, 28);
+}

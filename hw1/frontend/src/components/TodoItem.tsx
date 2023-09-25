@@ -27,16 +27,17 @@ export default function TodoItem({
   const [todoMood, setTodoMood] = useState(mood);
   const [todoDescription, setTodoDescription] = useState(description);
 
+  const weekDay = ['一', '二', '三', '四', '五', '六', '日']
   
   return (
-    <details className="todo-item">
+    <div className="todo-item">
       {mode == 0?
         <div>
           <summary>
-            <p>{date}</p>
+            <p>{date + `(${weekDay[new Date(date).getDay() - 1]})`}</p>
             <p>{tag}</p>
             <p>{mood}</p>
-            <button className="edit-todo" onClick={() =>{
+            <button className="delete-todo" onClick={() =>{
               setMode(1)!
             }}>
               edit
@@ -83,9 +84,8 @@ export default function TodoItem({
           onChange={(e) => setTodoDescription(e.target.value)}>
         </textarea>
     </div>
-      
-      }
-    </details>
+    }
+    </div>
   );
 }
 

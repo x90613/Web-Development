@@ -11,7 +11,7 @@ const instance = axios.create({
 
 
 export type TodoData = {
-  id?: string;
+  id?: string; //?用法
   date: string;
   tag: string;
   mood: string;
@@ -20,19 +20,26 @@ export type TodoData = {
 
 function App() {
   const [todos, setTodos] = useState<TodoData[]>([]);
-  const [todoDate, setTodoDate] = useState("2023-09-01");
+  const [todoDate, setTodoDate] = useState(getDay());
   const [todoTag, setTodoTag] = useState("學業");
   const [todoMood, setTodoMood] = useState("快樂");
   const [todoDescription, setTodoDescription] = useState("");
+  const [todoFilterTag, setTodoFilterTag] = useState("All");
+  const [todoFilterMood, setTodoFilterMood] = useState("All");
+  const [origin, setOrigin] = useState<TodoData[]>([]);
 
+  function getDay(){
+    const tmpDate = new Date();
+    const year = tmpDate.getFullYear();
+    const month = String(tmpDate.getMonth() + 1).padStart(2,"0");
+    const day = String(tmpDate.getDate()).padStart(2,"0");
+    return `${year}-${month}-${day}`
+  }
 
   async function init() {
-    try{
-      const todos = await getTodos();
-      setTodos(todos)
-    }catch(error){
-      alert("Failed to load todos");
-    }
+    const todos = await getTodos();
+    setOrigin(todos);
+    setTodos(todos);
   }
 
   useEffect(() => {
@@ -53,11 +60,15 @@ function App() {
     await createTodo(queryReq);
     init(); //重新getAllData
     setTodoDescription("");
+    setTodoFilterTag("All");
+    setTodoFilterMood("All");
   };
 
   const deleteTodo = async(id: string) => {
     await deleteTodoById(id)
     init();
+    setTodoFilterTag("All");
+    setTodoFilterMood("All");
   };
 
   const completeTodo = async(id: string, todo:TodoData) => {
@@ -66,6 +77,8 @@ function App() {
     init();
   };
 
+
+  // 4APIs to backend
   async function getTodos() {
     const response = await instance.get("/todos");
     return response.data;
@@ -116,8 +129,55 @@ function App() {
         value={todoDescription}
         onChange={(e) => setTodoDescription(e.target.value)}
       ></textarea>
+      <div className="filterWrapper">
+        <p>Tag Filter </p>
+        <select className="form-select" aria-label="Default select example"
+          value={todoFilterTag} onChange={async(e) => {
+              setTodoFilterTag(e.target.value)
+              let tmp:TodoData[] = origin; 
+              if(e.target.value !== "All")tmp = tmp.filter((todo) => todo.tag == e.target.value)
+              if(e.target.value == 'All')tmp = origin;
+              if(todoFilterMood !== "All")tmp = tmp.filter((todo) => todo.mood == todoFilterMood)
+              setTodos(tmp);
+            }
+          }>
+        <option defaultValue="All">All</option>
+        <option value="學業">學業</option>
+        <option value="人際">人際</option>
+        <option value="社團">社團</option>
+        </select>
+        <p>Mood Filter </p>
+        <select className="form-select" aria-label="Default select example"
+          value={todoFilterMood} onChange={async(e) => {
+            setTodoFilterMood(e.target.value)
+            let tmp:TodoData[] = origin; 
+            if(e.target.value !== "All")tmp = tmp.filter((todo) => todo.mood == e.target.value)
+            if(e.target.value == 'All')tmp = origin;
+            if(todoFilterTag !== "All")tmp = tmp.filter((todo) => todo.tag == todoFilterTag)
+            setTodos(tmp);
+          }
+        }>
+        <option defaultValue="All">All</option>
+        <option value="快樂">快樂</option>
+        <option value="生氣">生氣</option>
+        <option value="難過">難過</option>
+        </select>
+      </div>
       <section id="todos">
-        {todos.map((todo) => (
+        { 
+          todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            date={todo.date}
+            tag={todo.tag}
+            mood={todo.mood}
+            description={todo.description}
+            onComplete={(newTodo:TodoData) => 
+              completeTodo(todo.id!, newTodo)}
+            onDelete={() => deleteTodo(todo.id!)}
+          />
+        ))}
+        {/* {todos.map((todo) => (
           <TodoItem
             key={todo.id}
             date={todo.date}
@@ -129,7 +189,7 @@ function App() {
               completeTodo(todo.id!, newTodo)}}
             onDelete={() => deleteTodo(todo.id!)}
           />
-        ))}
+        ))} */}
       </section>
     </>
   );
