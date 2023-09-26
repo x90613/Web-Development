@@ -72,7 +72,6 @@ function App() {
   };
 
   const completeTodo = async(id: string, todo:TodoData) => {
-    console.log("enter");
     await updateTodoStatus(id, todo); 
     init();
   };

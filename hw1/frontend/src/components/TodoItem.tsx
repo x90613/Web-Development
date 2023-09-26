@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./todo-item.css";
-import { TodoData } from "../App";
+import type { TodoData } from "../App";
 
 
 type TodoItemProps = {
