@@ -37,7 +37,7 @@ export const createTodo = async (req, res) => {
       tag,
       mood,
       description,
-      completed: false,
+      //completed: false,
     });
     return res.status(201).json(newTodo);
   } catch (error) {
@@ -48,7 +48,7 @@ export const createTodo = async (req, res) => {
 // Update a todo
 export const updateTodo = async (req, res) => {
   const { id } = req.params;
-  const { date, tag, mood, description, completed } = req.body;
+  const { date, tag, mood, description } = req.body;
 
   try {
     // Check if the id is valid
