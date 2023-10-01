@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 
 const instance = axios.create({
   baseURL: "http://localhost:8000/api",
 });
-
 
 export type TodoData = {
   id?: string; //?用法
@@ -28,6 +26,7 @@ function App() {
   const [todoFilterMood, setTodoFilterMood] = useState("All");
   const [origin, setOrigin] = useState<TodoData[]>([]);
 
+  // 得到今天日期
   function getDay(){
     const tmpDate = new Date();
     const year = tmpDate.getFullYear();
@@ -36,21 +35,15 @@ function App() {
     return `${year}-${month}-${day}`
   }
 
+  // 讀取
   async function init() {
     const todos = await getTodos();
     setOrigin(todos);
     setTodos(todos);
   }
 
-  useEffect(() => {
-    init();
-  }, []);
-
+  // 新增
   const addTodo = async() => {
-    // if (todoTitle === "") {
-    //   alert("Please enter a title for your todo.");
-    //   return;
-    // }
     if (todoDescription === "") {
       alert("Please enter a description for your todo.");
       return;
@@ -63,7 +56,8 @@ function App() {
     setTodoFilterTag("All");
     setTodoFilterMood("All");
   };
-
+ 
+  // 刪除
   const deleteTodo = async(id: string) => {
     await deleteTodoById(id)
     init();
@@ -71,11 +65,15 @@ function App() {
     setTodoFilterMood("All");
   };
 
+  // 更新
   const completeTodo = async(id: string, todo:TodoData) => {
     await updateTodoStatus(id, todo); 
     init();
   };
 
+  useEffect(() => {
+    init();
+  }, []);
 
   // 4APIs to backend
   async function getTodos() {
@@ -176,19 +174,6 @@ function App() {
             onDelete={() => deleteTodo(todo.id!)}
           />
         ))}
-        {/* {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            date={todo.date}
-            tag={todo.tag}
-            mood={todo.mood}
-            description={todo.description}
-            onComplete={(newTodo:TodoData) => {
-              console.log("123");
-              completeTodo(todo.id!, newTodo)}}
-            onDelete={() => deleteTodo(todo.id!)}
-          />
-        ))} */}
       </section>
     </>
   );

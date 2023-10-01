@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./todo-item.css";
 import type { TodoData } from "../App";
 
-
+// 用來解析傳入的shit
 type TodoItemProps = {
   date: string;
   tag: string;
@@ -27,14 +27,14 @@ export default function TodoItem({
   const [todoMood, setTodoMood] = useState(mood);
   const [todoDescription, setTodoDescription] = useState(description);
 
-  const weekDay = ['一', '二', '三', '四', '五', '六', '日']
+  const weekDay = ['日', '一', '二', '三', '四', '五', '六']
   
   return (
     <div className="todo-item">
       {mode == 0?
         <div>
           <summary>
-            <p>{date + `(${weekDay[new Date(date).getDay() - 1]})`}</p>
+            <p>{date + `(${weekDay[new Date(date).getDay()]})`}</p>
             <p>{tag}</p>
             <p>{mood}</p>
             <button className="delete-todo" onClick={() =>{
