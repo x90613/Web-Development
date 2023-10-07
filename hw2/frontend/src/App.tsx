@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Add as AddIcon } from "@mui/icons-material";
 import { Button } from "@mui/material";
-
+import "./App.css";
 import CardList from "@/components/CardList";
 import HeaderBar from "@/components/HeaderBar";
 import NewListDialog from "@/components/NewListDialog";
@@ -21,24 +21,26 @@ function App() {
   return (
     <>
       <HeaderBar />
-      <div>
+      <div className="ButtomDiv">
           <Button
             variant="contained"
-            className="w-80"
+            sx={{ml:8}}
+            className="w-80 background-color: #D97706"
             onClick={() => setNewListDialogOpen(true)}
           >
             <AddIcon className="mr-2" />
-            Add a list
+            create
           </Button>
-          {"__pretty divider_____"}
           <Button
             variant="contained"
+            sx={{ml:8}}
+            color={deleteDisplay?"success":"error"}
             className="w-80"
             onClick={() => setDeleteDisplay(!deleteDisplay)}
-          >
+            >
             <AddIcon className="mr-2" />
             {deleteDisplay?"DONE":"DELETE"}
-        </Button>
+          </Button>
       </div>
 
       <main className="mx-auto flex max-h-full flex-row gap-6 px-24 py-12">

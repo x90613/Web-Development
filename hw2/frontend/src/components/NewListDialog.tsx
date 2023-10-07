@@ -34,7 +34,7 @@ export default function NewListDialog({ open, onClose }: NewListDialogProps) {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add a list</DialogTitle>
+      <DialogTitle>create a new playlist</DialogTitle>
       <DialogContent>
         <TextField
           inputRef={textfieldRef}
@@ -45,7 +45,7 @@ export default function NewListDialog({ open, onClose }: NewListDialogProps) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleAddList}>add</Button>
+        <Button onClick={handleAddList}>create</Button>
         <Button onClick={onClose}>cancel</Button>
       </DialogActions>
     </Dialog>

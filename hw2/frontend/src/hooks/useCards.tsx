@@ -12,7 +12,7 @@ import type { CardListProps } from "@/components/CardList";
 import { getCards, getLists } from "@/utils/client";
 
 type CardContextType = {
-  lists: CardListProps[];
+  lists: Omit<CardListProps,"display">[];
   fetchLists: () => Promise<void>;
   fetchCards: () => Promise<void>;
 };
@@ -62,7 +62,7 @@ export function CardProvider({ children }: CardProviderProps) {
         acc[list.id] = { ...list, cards: [] };
         return acc;
       },
-      {} as Record<string, CardListProps>,
+      {} as Record<string, Omit<CardListProps, "display">>, //Don't need to store display
     );
     // or you can do for loops
     for (const card of rawCards) {
@@ -76,7 +76,7 @@ export function CardProvider({ children }: CardProviderProps) {
       });
     }
     return Object.values(listMap);
-  }, [rawCards, rawLists]);
+  }, [rawCards, rawLists,]);
 
   return (
     <CardContext.Provider

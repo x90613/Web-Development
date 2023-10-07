@@ -57,6 +57,7 @@ export default function CardList({ id, name, cards, display }: CardListProps) {
   return (
     <>
       <Paper className="w-80 p-6">
+        <img src="https://images.radio.com/aiu-media/StaticSocialInstagram1080x1080PostMalone2023RegionalToyotaAmphitheatre0815-31411396-376c-4ba0-ae79-ce88c2f7408e.jpg"/>
         <div className="flex gap-4">
           {editingName ? (
             <ClickAwayListener onClickAway={handleUpdateName}>

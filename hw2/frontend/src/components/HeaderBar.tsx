@@ -18,7 +18,7 @@ export default function HeaderBar() {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          My playlists
+          My Playlists
         </Typography>
       </Toolbar>
     </AppBar>
