@@ -6,7 +6,7 @@ import type { Types } from "mongoose";
 interface CardDocument
   extends Omit<CardData, "id" | "list_id">,
     mongoose.Document {
-  list_id: Types.ObjectId;
+  list_id: Types.ObjectId; // extended by Mongoose
 }
 
 interface CardModel extends mongoose.Model<CardDocument> {}

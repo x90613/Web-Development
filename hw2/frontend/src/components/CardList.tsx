@@ -21,9 +21,10 @@ export type CardListProps = {
   id: string;
   name: string;
   cards: CardProps[];
+  display: boolean;
 };
 
-export default function CardList({ id, name, cards }: CardListProps) {
+export default function CardList({ id, name, cards, display }: CardListProps) {
   const [openNewCardDialog, setOpenNewCardDialog] = useState(false);
   const [editingName, setEditingName] = useState(false);
   const { fetchLists } = useCards();
@@ -79,9 +80,12 @@ export default function CardList({ id, name, cards }: CardListProps) {
             </button>
           )}
           <div className="grid place-items-center">
-            <IconButton color="error" onClick={handleDelete}>
+            {display?<IconButton color="error" onClick={handleDelete}>
               <DeleteIcon />
-            </IconButton>
+            </IconButton>:""}
+            {/* <IconButton color="error" onClick={handleDelete}>
+              <DeleteIcon />
+            </IconButton> */}
           </div>
         </div>
         <Divider variant="middle" sx={{ mt: 1, mb: 2 }} />
