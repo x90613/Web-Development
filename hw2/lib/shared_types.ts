@@ -19,6 +19,7 @@ export type CardData = {
 export type ListData = {
   id: string;
   name: string;
+  listDescription: string;
   cards: CardData[];
 };
 

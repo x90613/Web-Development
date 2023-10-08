@@ -31,6 +31,10 @@ function App() {
             <AddIcon className="mr-2" />
             create
           </Button>
+          <NewListDialog
+          open={newListDialogOpen}
+          onClose={() => setNewListDialogOpen(false)}
+          />
           <Button
             variant="contained"
             sx={{ml:8}}
@@ -49,11 +53,6 @@ function App() {
             display={deleteDisplay}
           />
         ))}
-
-        <NewListDialog
-          open={newListDialogOpen}
-          onClose={() => setNewListDialogOpen(false)}
-        />
       </main>
     </>
   );

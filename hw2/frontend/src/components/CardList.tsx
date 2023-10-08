@@ -16,16 +16,19 @@ import { deleteList, updateList } from "@/utils/client";
 import Card from "./Card";
 import type { CardProps } from "./Card";
 import CardDialog from "./CardDialog";
+import OpenList from "./OpenList";
 
 export type CardListProps = {
   id: string;
   name: string;
+  listDescription: string;
   cards: CardProps[];
   display: boolean;
 };
 
-export default function CardList({ id, name, cards, display }: CardListProps) {
+export default function CardList({ id, name,  listDescription , cards, display }: CardListProps) {
   const [openNewCardDialog, setOpenNewCardDialog] = useState(false);
+  const [openListDialog, setOpenListDialog] = useState(false);
   const [editingName, setEditingName] = useState(false);
   const { fetchLists } = useCards();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -101,6 +104,14 @@ export default function CardList({ id, name, cards, display }: CardListProps) {
             <AddIcon className="mr-2" />
             Add a card
           </Button>
+
+          <Button
+            variant="contained"
+            onClick={() => setOpenListDialog(true)}
+          >
+            <AddIcon className="mr-2" />
+            OPEN
+          </Button>
         </div>
       </Paper>
       <CardDialog
@@ -108,6 +119,14 @@ export default function CardList({ id, name, cards, display }: CardListProps) {
         open={openNewCardDialog}
         onClose={() => setOpenNewCardDialog(false)}
         listId={id}
+      />
+
+      <OpenList
+        open={openListDialog}
+        title={name}
+        onClose={() => setOpenListDialog(false)}
+        listId={id}
+        description={listDescription}
       />
     </>
   );

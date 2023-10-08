@@ -16,10 +16,11 @@ export const getLists = async (_: Request, res: Response<GetListsResponse>) => {
   try {
     const lists = await ListModel.find({});
 
-    // Return only the id and name of the list
+    // Return only the id, name and listDescription of the list
     const listsToReturn = lists.map((list) => {
       return {
         id: list.id,
+        listDescription: list.listDescription,
         name: list.name,
       };
     });
@@ -45,6 +46,7 @@ export const getList = async (
     return res.status(200).json({
       id: lists.id,
       name: lists.name,
+      listDescription: lists.listDescription,
       cards: lists.cards as unknown as CardData[],
     });
   } catch (error) {
