@@ -14,7 +14,7 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 
 import useCards from "@/hooks/useCards";
-import { createCard, deleteCard, updateCard } from "@/utils/client";
+import { createCard, deleteCard, getCards, updateCard } from "@/utils/client";
 import { Divider } from "@mui/material";
 
 // this pattern is called discriminated type unions
@@ -34,6 +34,7 @@ type OpenListDialogProps = {
 export default function CardDialog(props: OpenListDialogProps) {
   const { open, onClose, listId, title, description} = props;
   
+  //using listID to get its cards
 
   return (
     <Dialog open={open} >
@@ -46,6 +47,21 @@ export default function CardDialog(props: OpenListDialogProps) {
         <Typography className="text-start">Song Singer URL </Typography> 
       </DialogTitle>
       <Divider variant="middle" sx={{ mt: 1, mb: 2 }} />
+      {/* <section id="todos">
+        { 
+          todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            date={todo.date}
+            tag={todo.tag}
+            mood={todo.mood}
+            description={todo.description}
+            onComplete={(newTodo:TodoData) => completeTodo(todo.id!, newTodo)}
+            onDelete={() => deleteTodo(todo.id!)}
+          />
+        ))}
+      </section>   */}
+
       <DialogContent className="w-[600px]">
         <DialogActions>
           <Button onClick={onClose}>close</Button>

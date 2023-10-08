@@ -22,6 +22,14 @@ const CardSchema = new mongoose.Schema<CardDocument>(
       type: String,
       required: true,
     },
+    singer: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
     list_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "List",

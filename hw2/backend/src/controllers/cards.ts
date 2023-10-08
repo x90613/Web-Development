@@ -21,6 +21,8 @@ export const getCards = async (_: Request, res: Response<GetCardsResponse>) => {
       id: card.id as string,
       title: card.title,
       description: card.description,
+      singer:card.singer,
+      url:card.url,
       list_id: card.list_id.toString(),
     }));
 
@@ -48,6 +50,8 @@ export const getCard = async (
       id: card.id as string,
       title: card.title,
       description: card.description,
+      singer:card.singer,
+      url:card.url,
       list_id: card.list_id.toString(),
     });
   } catch (error) {
@@ -61,17 +65,18 @@ export const createCard = async (
   res: Response<CreateCardResponse | { error: string }>,
 ) => {
   try {
-    const { title, description, list_id } = req.body;
+    const { title, description, singer, url, list_id } = req.body;
 
     // Check if the list exists
     const list = await ListModel.findById(list_id);
     if (!list) {
       return res.status(404).json({ error: "list_id is not valid" });
     }
-
     const card = await CardModel.create({
       title,
       description,
+      singer,
+      url,
       list_id,
     });
 
@@ -104,7 +109,7 @@ export const updateCard = async (
 
   try {
     const { id } = req.params;
-    const { title, description, list_id } = req.body;
+    const { title, description, singer, url, list_id } = req.body;
 
     // Check if the card exists
     const oldCard = await CardModel.findById(id);
@@ -126,6 +131,8 @@ export const updateCard = async (
       {
         title,
         description,
+        singer,
+        url,
         list_id,
       },
       { new: true },

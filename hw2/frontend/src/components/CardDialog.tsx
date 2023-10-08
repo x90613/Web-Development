@@ -34,6 +34,8 @@ type EditCardDialogProps = {
   cardId: string;
   title: string;
   description: string;
+  singer: string;
+  url: string;
 };
 
 type CardDialogProps = NewCardDialogProps | EditCardDialogProps;
@@ -42,17 +44,21 @@ export default function CardDialog(props: CardDialogProps) {
   const { variant, open, onClose, listId } = props;
   const title = variant === "edit" ? props.title : "";
   const description = variant === "edit" ? props.description : "";
+  const singer = variant === "edit" ? props.singer : "";
+  const url = variant === "edit" ? props.url : "";
 
   const [editingTitle, setEditingTitle] = useState(variant === "new");
-  const [editingDescription, setEditingDescription] = useState(
-    variant === "new",
-  );
+  const [editingDescription, setEditingDescription] = useState(variant === "new");
+  const [editingSinger, setEditingSinger] = useState(variant === "new");
+  const [editingUrl, setEditingUrl] = useState(variant === "new");
 
   // using a state variable to store the value of the input, and update it on change is another way to get the value of a input
   // however, this method is not recommended for large forms, as it will cause a re-render on every change
   // you can read more about it here: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
+  const [newSinger, setNewSinger] = useState(singer);
+  const [newUrl, setNewUrl] = useState(url);
   const [newListId, setNewListId] = useState(listId);
 
   const { lists, fetchCards } = useCards();
@@ -72,13 +78,17 @@ export default function CardDialog(props: CardDialogProps) {
         await createCard({
           title: newTitle,
           description: newDescription,
+          singer: newSinger,
+          url: newUrl,
           list_id: listId,
         });
       } else {
         if (
           newTitle === title &&
           newDescription === description &&
-          newListId === listId
+          newListId === listId &&
+          newSinger === singer &&
+          newUrl === url 
         ) {
           return;
         }
@@ -87,6 +97,8 @@ export default function CardDialog(props: CardDialogProps) {
         await updateCard(props.cardId, {
           title: newTitle,
           description: newDescription,
+          singer: newSinger,
+          url: newUrl,
           list_id: newListId,
         });
       }
@@ -178,6 +190,56 @@ export default function CardDialog(props: CardDialogProps) {
             className="w-full rounded-md p-2 hover:bg-white/10"
           >
             <Typography className="text-start">{newDescription}</Typography>
+          </button>
+        )}
+
+        {editingSinger ? (
+          <ClickAwayListener
+            onClickAway={() => {
+              if (variant === "edit") {
+                setEditingSinger(false);
+              }
+            }}
+          >
+            <textarea
+              className="bg-white/0 p-2"
+              autoFocus
+              defaultValue={singer}
+              placeholder="Add a singer..."
+              onChange={(e) => setNewSinger(e.target.value)}
+            />
+          </ClickAwayListener>
+        ) : (
+          <button
+            onClick={() => setEditingSinger(true)}
+            className="w-full rounded-md p-2 hover:bg-white/10"
+          >
+            <Typography className="text-start">{newSinger}</Typography>
+          </button>
+        )}
+
+        {editingUrl ? (
+          <ClickAwayListener
+            onClickAway={() => {
+              if (variant === "edit") {
+                setEditingUrl(false);
+              }
+            }}
+          >
+            <textarea
+              className="bg-white/0 p-2"
+              autoFocus
+              defaultValue={url}
+              placeholder="Add a url..."
+              onChange={(e) => setNewUrl(e.target.value)}
+            />
+          </ClickAwayListener>
+        ) : (
+          <button
+            onClick={() => setEditingUrl(true)}
+            className="w-full rounded-md p-2 hover:bg-white/10"
+          >
+            <Typography className="text-start">{newUrl}</Typography>
           </button>
         )}
         <DialogActions>
