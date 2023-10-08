@@ -11,8 +11,8 @@ import Typography from "@mui/material/Typography";
 
 
 import { ClickAwayListener, Divider, Input } from "@mui/material";
-import Card, { CardProps } from "./Card";
-import SongTable from "./SongTable";
+import type { CardProps } from "./Card";
+import Card from "./Card";
 import { updateList } from "@/utils/client";
 import useCards from "@/hooks/useCards";
 

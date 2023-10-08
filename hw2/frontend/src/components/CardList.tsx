@@ -15,7 +15,6 @@ import useCards from "@/hooks/useCards";
 import { deleteList, updateList } from "@/utils/client";
 
 import type { CardProps } from "./Card";
-import CardDialog from "./CardDialog";
 import OpenList from "./OpenList";
 
 export type CardListProps = {
@@ -27,7 +26,6 @@ export type CardListProps = {
 };
 
 export default function CardList({ id, name,  listDescription , cards, display }: CardListProps) {
-  const [openNewCardDialog, setOpenNewCardDialog] = useState(false);
   const [openListDialog, setOpenListDialog] = useState(false);
   const [editingName, setEditingName] = useState(false);
   const { fetchLists } = useCards();
@@ -98,13 +96,13 @@ export default function CardList({ id, name,  listDescription , cards, display }
           {/* {cards.map((card) => (
             <Card key={card.id} {...card} />
           ))} */}
-          <Button
+          {/* <Button
             variant="contained"
             onClick={() => setOpenNewCardDialog(true)}
           >
             <AddIcon className="mr-2" />
             Add a card
-          </Button>
+          </Button> */}
 
           <Button
             variant="contained"
@@ -115,12 +113,12 @@ export default function CardList({ id, name,  listDescription , cards, display }
           </Button>
         </div>
       </Paper>
-      <CardDialog
+      {/* <CardDialog
         variant="new"
         open={openNewCardDialog}
         onClose={() => setOpenNewCardDialog(false)}
         listId={id}
-      />
+      /> */}
 
       <OpenList
         open={openListDialog}

@@ -9,8 +9,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 
 import useCards from "@/hooks/useCards";
@@ -57,7 +55,7 @@ export default function CardDialog(props: CardDialogProps) {
   const [newUrl, setNewUrl] = useState(url);
   const [newListId, setNewListId] = useState(listId);
 
-  const { lists, fetchCards } = useCards();
+  const {fetchCards} = useCards();
 
   const handleClose = () => {
     onClose();

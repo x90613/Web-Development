@@ -75,7 +75,6 @@ export const updateList = async (
   try {
     const { id } = req.params;
     const { name, listDescription } = req.body;
-    console.log(name, listDescription)
 
     // Update the list
     const newList = await ListModel.findByIdAndUpdate(

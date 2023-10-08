@@ -26,7 +26,7 @@ export default function Card({ id, title, singer, url, listId }: CardProps) {
           <span className="inline-block w-1/4 truncate">{singer}</span>
           <span className="inline-block w-1/4 truncate">{url}</span>
           <span className="inline-block w-1/4">
-            <a href={`${url}`} target="_blank"><LinkIcon className="mr-2" /></a>
+            <a href={`${url}`} target="_blank" rel="noreferrer"><LinkIcon className="mr-2" /></a>
           </span>
         </Paper>
       </button>
