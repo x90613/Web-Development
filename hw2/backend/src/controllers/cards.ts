@@ -20,7 +20,6 @@ export const getCards = async (_: Request, res: Response<GetCardsResponse>) => {
     const cards = dbCards.map((card) => ({
       id: card.id as string,
       title: card.title,
-      description: card.description,
       singer:card.singer,
       url:card.url,
       list_id: card.list_id.toString(),
@@ -49,7 +48,6 @@ export const getCard = async (
     return res.status(200).json({
       id: card.id as string,
       title: card.title,
-      description: card.description,
       singer:card.singer,
       url:card.url,
       list_id: card.list_id.toString(),
@@ -65,7 +63,7 @@ export const createCard = async (
   res: Response<CreateCardResponse | { error: string }>,
 ) => {
   try {
-    const { title, description, singer, url, list_id } = req.body;
+    const { title, singer, url, list_id } = req.body;
 
     // Check if the list exists
     const list = await ListModel.findById(list_id);
@@ -74,7 +72,6 @@ export const createCard = async (
     }
     const card = await CardModel.create({
       title,
-      description,
       singer,
       url,
       list_id,
@@ -109,7 +106,7 @@ export const updateCard = async (
 
   try {
     const { id } = req.params;
-    const { title, description, singer, url, list_id } = req.body;
+    const { title, singer, url, list_id } = req.body;
 
     // Check if the card exists
     const oldCard = await CardModel.findById(id);
@@ -130,7 +127,6 @@ export const updateCard = async (
       id,
       {
         title,
-        description,
         singer,
         url,
         list_id,

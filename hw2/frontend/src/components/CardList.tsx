@@ -87,16 +87,13 @@ export default function CardList({ id, name,  listDescription , cards, display }
             {display?<IconButton color="error" onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>:""}
-            {/* <IconButton color="error" onClick={handleDelete}>
-              <DeleteIcon />
-            </IconButton> */}
           </div>
         </div>
         <Divider variant="middle" sx={{ mt: 1, mb: 2 }} />
         <div className="flex flex-col gap-4">
-          {cards.map((card) => (
+          {/* {cards.map((card) => (
             <Card key={card.id} {...card} />
-          ))}
+          ))} */}
           <Button
             variant="contained"
             onClick={() => setOpenNewCardDialog(true)}
@@ -127,6 +124,7 @@ export default function CardList({ id, name,  listDescription , cards, display }
         onClose={() => setOpenListDialog(false)}
         listId={id}
         description={listDescription}
+        cards={cards}
       />
     </>
   );
