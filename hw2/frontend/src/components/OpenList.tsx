@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-import { Delete as DeleteIcon, Description } from "@mui/icons-material";
 import Button from "@mui/material/Button";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Dialog from "@mui/material/Dialog";
 import AddIcon from "@mui/icons-material/Add";
 import DialogActions from "@mui/material/DialogActions";
@@ -12,10 +10,9 @@ import CardDialog from "./CardDialog";
 import Typography from "@mui/material/Typography";
 
 
-import useCards from "@/hooks/useCards";
-import { createCard, deleteCard, getCards, updateCard } from "@/utils/client";
 import { Divider } from "@mui/material";
 import Card, { CardProps } from "./Card";
+import SongTable from "./SongTable";
 
 // this pattern is called discriminated type unions
 // you can read more about it here: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
@@ -38,7 +35,14 @@ export default function OpenList(props: OpenListDialogProps) {
   //using listID to get its cards
 
   return (
-    <Dialog open={open} >
+    <Dialog open={open} fullWidth={true} maxWidth="xl">
+      <div>
+        <DialogContent>
+          <DialogActions>
+            <Button onClick={onClose}>close</Button>
+          </DialogActions>
+        </DialogContent>
+      </div>
       <DialogTitle className="flex flex-col gap-2">
         <Typography className="text-start">{title}</Typography>
         <div className="flex gap-2">
@@ -48,9 +52,10 @@ export default function OpenList(props: OpenListDialogProps) {
         <Button
             variant="contained"
             onClick={() => setOpenNewCardDialog(true)}
+            className="w-60"
           >
             <AddIcon className="mr-2" />
-            Add a card
+            Add
         </Button>
 
         <CardDialog
@@ -67,12 +72,9 @@ export default function OpenList(props: OpenListDialogProps) {
             <Card key={card.id} {...card} />
           ))}
       </div>
-
-      <DialogContent className="w-[600px]">
-        <DialogActions>
-          <Button onClick={onClose}>close</Button>
-        </DialogActions>
-      </DialogContent>
+      <div>
+        <SongTable/>
+      </div>
 
 
     </Dialog>

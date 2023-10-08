@@ -13,7 +13,6 @@ import Typography from "@mui/material/Typography";
 import useCards from "@/hooks/useCards";
 import { deleteList, updateList } from "@/utils/client";
 
-import Card from "./Card";
 import type { CardProps } from "./Card";
 import CardDialog from "./CardDialog";
 import OpenList from "./OpenList";
