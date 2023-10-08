@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 
 import useCards from "@/hooks/useCards";
 import { deleteList, updateList } from "@/utils/client";
@@ -88,6 +89,10 @@ export default function CardList({ id, name,  listDescription , cards, display }
             </IconButton>:""}
           </div>
         </div>
+        <Typography className="p-2" variant="body1">
+            <LibraryMusicIcon className="mr-3" />
+            {`${cards.length} songs`}
+        </Typography>
         <Divider variant="middle" sx={{ mt: 1, mb: 2 }} />
         <div className="flex flex-col gap-4">
           {/* {cards.map((card) => (

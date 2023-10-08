@@ -1,8 +1,7 @@
 import { useState } from "react";
-
 import { Paper } from "@mui/material";
-
 import CardDialog from "./CardDialog";
+import LinkIcon from '@mui/icons-material/Link';
 
 export type CardProps = {
   id: string;
@@ -22,11 +21,13 @@ export default function Card({ id, title, singer, url, listId }: CardProps) {
   return (
     <>
       <button onClick={handleClickOpen} className="text-start">
-        <Paper className="flex w-full  p-2 gap-10" elevation={6}>
-          {title + ` / ` }
-          {singer + ` / `}
-          {url + ' / '}
-          <a href={`${url}`} target="_blank">link</a>
+        <Paper className="flex ml-5 mr-5 p-2 gap-10 items-center" elevation={6}>
+          <span className="inline-block w-1/4 truncate">{title}</span>
+          <span className="inline-block w-1/4 truncate">{singer}</span>
+          <span className="inline-block w-1/4 truncate">{url}</span>
+          <span className="inline-block w-1/4">
+            <a href={`${url}`} target="_blank"><LinkIcon className="mr-2" /></a>
+          </span>
         </Paper>
       </button>
       <CardDialog

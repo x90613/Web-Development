@@ -69,18 +69,20 @@ export const createList = async (
 
 // Update a list
 export const updateList = async (
-  req: Request<{ id: string }, never, UpdateListPayload>,
+  req: Request<{ id: string, listDescription:string }, never, UpdateListPayload>,
   res: Response,
 ) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, listDescription } = req.body;
+    console.log(name, listDescription)
 
     // Update the list
     const newList = await ListModel.findByIdAndUpdate(
       id,
       {
         name: name,
+        listDescription: listDescription,
       },
       { new: true },
     );

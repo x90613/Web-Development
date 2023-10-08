@@ -100,7 +100,8 @@ export default function CardDialog(props: CardDialogProps) {
     } catch (error) {
       alert("Error: Failed to save card");
     } finally {
-      handleClose();
+      onClose();
+      //handleClose();
     }
   };
 
@@ -134,7 +135,7 @@ export default function CardDialog(props: CardDialogProps) {
               defaultValue={title}
               onChange={(e) => setNewTitle(e.target.value)}
               className="grow"
-              placeholder="Enter a title for this card..."
+              placeholder="Enter this song name ..."
             />
           </ClickAwayListener>
         ) : (

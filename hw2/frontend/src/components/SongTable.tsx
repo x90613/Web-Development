@@ -20,6 +20,14 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import { CardProps } from './Card';
+
+
+export type SongTableProps = {
+  //id: string;
+  cards: CardProps[];
+};
+
 
 interface Data {
   calories: number;
@@ -305,10 +313,6 @@ export default function SongTable() {
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDense(event.target.checked);
   };
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1;

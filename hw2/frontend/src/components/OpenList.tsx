@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -10,9 +10,11 @@ import CardDialog from "./CardDialog";
 import Typography from "@mui/material/Typography";
 
 
-import { Divider } from "@mui/material";
+import { ClickAwayListener, Divider, Input } from "@mui/material";
 import Card, { CardProps } from "./Card";
 import SongTable from "./SongTable";
+import { updateList } from "@/utils/client";
+import useCards from "@/hooks/useCards";
 
 // this pattern is called discriminated type unions
 // you can read more about it here: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
@@ -31,8 +33,47 @@ type OpenListDialogProps = {
 
 export default function OpenList(props: OpenListDialogProps) {
   const { open, onClose, listId, title, description, cards} = props;
+  const [editingName, setEditingName] = useState(false);
+  const [editingListDescription, setEditingListDescription] = useState(false);
   const [openNewCardDialog, setOpenNewCardDialog] = useState(false);
+  const inputTitleRef = useRef<HTMLInputElement>(null);
+  const inputListDescriptionRef = useRef<HTMLInputElement>(null);
+  const { fetchLists } = useCards();
   //using listID to get its cards
+
+
+  const handleUpdateName = async () => {
+    if (!inputTitleRef.current) return;
+
+    const newName = inputTitleRef.current.value;
+    if (newName !== title ) {
+      try {
+        await updateList(listId, { name: newName });
+        fetchLists();
+      } catch (error) {
+        alert("Error: Failed to update list name");
+      }
+    }
+    setEditingListDescription(false);
+    setEditingName(false);
+  };
+
+  const handleUpdateListDescription = async () => {
+    if (!inputListDescriptionRef.current) return;
+
+    const newListDescription = inputListDescriptionRef.current.value;
+    if (newListDescription !== description) {
+      try {
+        await updateList(listId, { listDescription: newListDescription });
+        fetchLists();
+      } catch (error) {
+        alert("Error: Failed to update list name");
+      }
+    }
+    setEditingListDescription(false);
+    setEditingName(false);
+  };
+
 
   return (
     <Dialog open={open} fullWidth={true} maxWidth="xl">
@@ -43,11 +84,53 @@ export default function OpenList(props: OpenListDialogProps) {
           </DialogActions>
         </DialogContent>
       </div>
-      <DialogTitle className="flex flex-col gap-2">
-        <Typography className="text-start">{title}</Typography>
+        <DialogTitle className="flex flex-col gap-2">
+        <div className="flex gap-4">
+          {editingName ? (
+              <ClickAwayListener onClickAway={handleUpdateName}>
+                <Input
+                  autoFocus
+                  defaultValue={title}
+                  className="grow"
+                  placeholder="Enter a name for this playlist..."
+                  sx={{ fontSize: "2rem" }}
+                  inputRef={inputTitleRef}
+                />
+              </ClickAwayListener>
+            ) : (
+              <button
+                onClick={() => setEditingName(true)}
+                className="w-full rounded-md p-2 hover:bg-white/10"
+              >
+                <Typography className="text-start" variant="h4">
+                  {title}
+                </Typography>
+              </button>
+          )}
+        </div>
         <div className="flex gap-2">
             <img src="https://images.radio.com/aiu-media/StaticSocialInstagram1080x1080PostMalone2023RegionalToyotaAmphitheatre0815-31411396-376c-4ba0-ae79-ce88c2f7408e.jpg" width={300}/>
-            <Typography className="text-start">{description}</Typography>       
+            {editingListDescription ? (
+            <ClickAwayListener onClickAway={handleUpdateListDescription}>
+              <Input
+                autoFocus
+                defaultValue={description}
+                className="grow flex-wrap"
+                placeholder="Enter a description for this playlist..."
+                sx={{ fontSize: "2rem" }}
+                inputRef={inputListDescriptionRef}
+              />
+            </ClickAwayListener>
+            ) : (
+            <button
+              onClick={() => setEditingListDescription(true)}
+              className="w-full rounded-md p-2 hover:bg-white/10"
+            >
+              <Typography className="text-start" variant="h4">
+                {description}
+              </Typography>
+            </button>
+            )}     
         </div> 
         <Button
             variant="contained"
@@ -64,19 +147,23 @@ export default function OpenList(props: OpenListDialogProps) {
           onClose={() => setOpenNewCardDialog(false)}
           listId={listId}
         />
-        <Typography className="text-start">Song Singer URL </Typography> 
+        <div className="flex gap-10 items-center">
+          <span className="inline-block w-1/4">Song</span>
+          <span className="inline-block w-1/4">Singer</span>
+          <span className="inline-block w-1/4">URL</span>
+          <span className="inline-block w-1/4">Link</span>
+        </div>
+        {/* <Typography className="text-start">Song Singer URL </Typography>  */}
       </DialogTitle>
       <Divider variant="middle" sx={{ mt: 1, mb: 2 }} />
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mb-10">
           {cards.map((card) => (
             <Card key={card.id} {...card} />
           ))}
       </div>
-      <div>
+      {/* <div>
         <SongTable/>
-      </div>
-
-
+      </div> */}
     </Dialog>
   );
 }
