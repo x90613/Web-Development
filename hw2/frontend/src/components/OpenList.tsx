@@ -6,10 +6,10 @@ import AddIcon from "@mui/icons-material/Add";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import CardDialog from "./CardDialog";
 import Typography from "@mui/material/Typography";
 
 
+import CardDialog from "./CardDialog";
 import { ClickAwayListener, Divider, Input } from "@mui/material";
 import type { CardProps } from "./Card";
 import Card from "./Card";
@@ -36,15 +36,19 @@ export default function OpenList(props: OpenListDialogProps) {
   const [editingName, setEditingName] = useState(false);
   const [editingListDescription, setEditingListDescription] = useState(false);
   const [openNewCardDialog, setOpenNewCardDialog] = useState(false);
+  const [deleteCard, setDeleteCard] = useState(false);
   const inputTitleRef = useRef<HTMLInputElement>(null);
   const inputListDescriptionRef = useRef<HTMLInputElement>(null);
   const { fetchLists } = useCards();
-  //using listID to get its cards
+
 
 
   const handleUpdateName = async () => {
     if (!inputTitleRef.current) return;
-
+    if (inputTitleRef.current.value ===""){
+      setEditingName(false)
+      return;
+    }
     const newName = inputTitleRef.current.value;
     if (newName !== title ) {
       try {
@@ -54,12 +58,15 @@ export default function OpenList(props: OpenListDialogProps) {
         alert("Error: Failed to update list name");
       }
     }
-    setEditingListDescription(false);
     setEditingName(false);
   };
 
   const handleUpdateListDescription = async () => {
     if (!inputListDescriptionRef.current) return;
+    if (inputListDescriptionRef.current.value ===""){
+      setEditingListDescription(false)
+      return;
+    }
 
     const newListDescription = inputListDescriptionRef.current.value;
     if (newListDescription !== description) {
@@ -71,7 +78,6 @@ export default function OpenList(props: OpenListDialogProps) {
       }
     }
     setEditingListDescription(false);
-    setEditingName(false);
   };
 
 
@@ -132,15 +138,25 @@ export default function OpenList(props: OpenListDialogProps) {
             </button>
             )}     
         </div> 
-        <Button
+        <div className="flex gap-4">
+          <Button
             variant="contained"
             onClick={() => setOpenNewCardDialog(true)}
             className="w-60"
-          >
+            >
             <AddIcon className="mr-2" />
             Add
-        </Button>
-
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {setDeleteCard(!deleteCard)
+            console.log(deleteCard)}}
+            className="w-60"
+            >
+            <AddIcon className="mr-2" />
+            delete
+          </Button>
+        </div>
         <CardDialog
           variant="new"
           open={openNewCardDialog}
@@ -158,7 +174,7 @@ export default function OpenList(props: OpenListDialogProps) {
       <Divider variant="middle" sx={{ mt: 1, mb: 2 }} />
       <div className="flex flex-col gap-4 mb-10">
           {cards.map((card) => (
-            <Card key={card.id} {...card} />
+            <Card key={card.id} {...card} deleteCard={deleteCard}/>
           ))}
       </div>
       {/* <div>

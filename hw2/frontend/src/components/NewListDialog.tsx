@@ -27,7 +27,7 @@ export default function NewListDialog({ open, onClose }: NewListDialogProps) {
       await createList({ name: namefieldRef.current?.value ?? "" , listDescription: listDescriptionfieldRef.current?.value ?? "" });
       fetchLists();
     } catch (error) {
-      alert("Error: Failed to create list");
+      alert("Error: Plz fill in the name and the description");
     } finally {
       onClose();
     }
