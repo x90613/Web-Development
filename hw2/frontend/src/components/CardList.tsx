@@ -33,6 +33,10 @@ export default function CardList({ id, name,  listDescription , cards, display }
 
   const handleUpdateName = async () => {
     if (!inputRef.current) return;
+    if (inputRef.current.value ===""){
+      setEditingName(false)
+      return;
+    }
 
     const newName = inputRef.current.value;
     if (newName !== name) {

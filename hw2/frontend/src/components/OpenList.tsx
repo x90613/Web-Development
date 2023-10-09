@@ -149,8 +149,7 @@ export default function OpenList(props: OpenListDialogProps) {
           </Button>
           <Button
             variant="contained"
-            onClick={() => {setDeleteCard(!deleteCard)
-            console.log(deleteCard)}}
+            onClick={() => setDeleteCard(!deleteCard)}
             className="w-60"
             >
             <AddIcon className="mr-2" />

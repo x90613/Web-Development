@@ -38,6 +38,7 @@ export default function Card({ id, title, singer, url, listId , deleteCard}: Car
     if(checkbox === true){
       handleDelete()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[deleteCard])
 
 
