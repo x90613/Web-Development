@@ -73,11 +73,11 @@ const AuthLayout = () => {
               <TabsTrigger
                 asChild
                 key={tab.title}
-                value=""
+                value={tab.path}
                 className="last-of-type:border-r-0"
                 data-testid={`tab-${tab.path}`}
               >
-                <NavLink to="" />
+                 <NavLink to={`/${tab.path}`}>{tab.title}</NavLink>
               </TabsTrigger>
               /* End of TODO 1.3 */
             ))}
@@ -90,8 +90,8 @@ const AuthLayout = () => {
             {/* The logo should be vscoddit.svg in the public folder. */}
             {/* The logo should have alt text "VSCoddit Logo". */}
             {/* The title should be "VSCoddit" */}
-            <img data-testid="header-logo" className="h-5 w-5 brightness-200" />
-            <span data-testid="header-title" />
+            <img data-testid="header-logo" className="h-5 w-5 brightness-200" src="/vscoddit.svg" alt="VSCoddit Logo"/>
+            <span data-testid="header-title">VSCoddit</span>
             {/* END of TODO 1.1 */}
           </CardTitle>
           <CardDescription>
