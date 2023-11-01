@@ -25,7 +25,7 @@ starting backend and frontend
 ```bash
 # enter hw1 folder
 cd frontend
-yarn start
+yarn dev
 cd ..
 cd backend
 yarn start
