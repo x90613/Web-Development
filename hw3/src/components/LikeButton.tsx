@@ -53,7 +53,7 @@ export default function LikeButton({
   return (
     <button
       className={cn(
-        "flex w-16 items-center gap-1 hover:text-brand",
+        "flex w-25 items-center gap-1 hover:text-brand",
         liked && "text-brand",
       )}
       onClick={handleClick}
@@ -67,7 +67,7 @@ export default function LikeButton({
       >
         <Heart size={18} />
       </div>
-      {likesCount > 0 && likesCount}
+      {likesCount === null ? 0 : likesCount}人參加
     </button>
   );
 }

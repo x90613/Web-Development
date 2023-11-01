@@ -46,16 +46,18 @@ export default function Tweet({
         }}
       >
         <div className="flex gap-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <article className="flex grow flex">
+            {/* `white-space: pre-wrap` tells html to render \n and \t chracters  */}
             <article className="mt-2 whitespace-pre-wrap">{content}</article>
           </article>
-          <div className="flex items-center justify-end">
-              <LikeButton 
-                initialLikes={likes}
-                initialLiked={liked}
-                tweetId={id}
-                handle={handle}
-              />
+          <div className="my-2 flex items-center justify-end gap-4 text-gray-400">
+            <LikeButton
+              initialLikes={likes}
+              initialLiked={liked}
+              tweetId={id}
+              handle={handle}
+            />
           </div>
         </div>
       </Link>

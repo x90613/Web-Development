@@ -64,7 +64,7 @@ export default function TweetInput() {
             onClick={handleTweet}
             disabled={loading}
           >
-            add
+            新增
           </button>
         </div>
       </div>
