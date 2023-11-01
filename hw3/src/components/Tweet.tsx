@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { MessageCircle, Repeat2, Share } from "lucide-react";
+import { Check, MessageCircle, Repeat2, Share } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
-import { getAvatar } from "@/lib/utils";
+import { cn, getAvatar } from "@/lib/utils";
 
 import LikeButton from "./LikeButton";
 import TimeText from "./TimeText";
@@ -52,12 +52,14 @@ export default function Tweet({
             <article className="mt-2 whitespace-pre-wrap">{content}</article>
           </article>
           <div className="my-2 flex items-center justify-end gap-4 text-gray-400">
-            <LikeButton
+            {/* <LikeButton
               initialLikes={likes}
               initialLiked={liked}
               tweetId={id}
               handle={handle}
-            />
+            /> */}
+            {liked && <Check size={30} color="#2b883d" />}
+            {likes === null ? 0 : likes}人參加
           </div>
         </div>
       </Link>

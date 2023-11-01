@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { EventHandler, MouseEvent } from "react";
 
-import { Heart } from "lucide-react";
+import { Check, Heart } from "lucide-react";
 
 import useLike from "@/hooks/useLike";
 import { cn } from "@/lib/utils";
@@ -51,23 +51,25 @@ export default function LikeButton({
   };
 
   return (
-    <button
-      className={cn(
-        "flex w-25 items-center gap-1 hover:text-brand",
-        liked && "text-brand",
-      )}
-      onClick={handleClick}
-      disabled={loading}
-    >
-      <div
+    <>
+      <button
         className={cn(
-          "flex items-center gap-1 rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10",
-          liked && "bg-brand/10",
+          "flex w-25 items-center gap-1 hover:text-brand",
+          liked && "text-brand",
         )}
+        onClick={handleClick}
+        disabled={loading}
       >
-        <Heart size={18} />
-      </div>
-      {likesCount === null ? 0 : likesCount}人參加
-    </button>
+        <div
+          className={cn(
+            "flex items-center gap-1 rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10",
+            liked && "bg-brand/40",
+          )}
+        >
+          <Check size={18} />
+        </div>       
+      </button>
+      {/* {likesCount === null ? 0 : likesCount}人參加 */}
+    </>
   );
 }
