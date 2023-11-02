@@ -7,6 +7,7 @@ import { cn, getAvatar } from "@/lib/utils";
 
 import LikeButton from "./LikeButton";
 import TimeText from "./TimeText";
+import Paper from "@mui/material/Paper";
 
 type TweetProps = {
   username?: string;
@@ -36,7 +37,7 @@ export default function Tweet({
   return (
     <>
       <Link
-        className="w-full px-4 pt-3 transition-colors hover:bg-gray-50"
+        className="w-full m-1 mb-3 px-4 pt-3 transition-colors bg-gray-100 hover:bg-gray-400 border border-gray-300 rounded"
         href={{
           pathname: `/tweet/${id}`,
           query: {
@@ -49,7 +50,7 @@ export default function Tweet({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <article className="flex grow flex">
             {/* `white-space: pre-wrap` tells html to render \n and \t chracters  */}
-            <article className="mt-2 whitespace-pre-wrap">{content}</article>
+            <article className="mt-2 whitespace-pre-wrap font-bold text-lg">{content}</article>
           </article>
           <div className="my-2 flex items-center justify-end gap-4 text-gray-400">
             {/* <LikeButton
@@ -59,11 +60,13 @@ export default function Tweet({
               handle={handle}
             /> */}
             {liked && <Check size={30} color="#2b883d" />}
-            {likes === null ? 0 : likes}人參加
+            <div className="font-bold text-lg text-black">
+              {likes === null ? 0 : likes}人參加
+            </div>
+ 
           </div>
         </div>
       </Link>
-      <Separator />
     </>
   );
 }

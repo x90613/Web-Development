@@ -13,7 +13,7 @@ import {
 import LikeButton from "@/components/LikeButton";
 import ReplyInput from "@/components/ReplyInput";
 import TimeText from "@/components/TimeText";
-import Tweet from "@/components/Tweet";
+import Tweet from "@/components/TweetReply";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
 import { likesTable, tweetsTable, usersTable } from "@/db/schema";
@@ -184,12 +184,11 @@ export default async function TweetPage({
           <Link href={{ pathname: "/", query: { username, handle } }}>
             <ArrowLeft size={18} />
           </Link>
-          <h1 className="text-xl font-bold">Tweet</h1>
+          <h1 className="text-xl font-bold">揪團</h1>
         </div>
         <div className="flex flex-col px-4 pt-3">
           <div className="flex justify-between">
-            <div className="flex w-full gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+            {/* <div className="flex w-full gap-3">
               <img
                 src={getAvatar(tweet.username)}
                 alt="user avatar"
@@ -203,38 +202,25 @@ export default async function TweetPage({
                   @{tweet.handle ?? "..."}
                 </p>
               </div>
-            </div>
-            <button className="h-fit rounded-full p-2.5 text-gray-400 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <MoreHorizontal size={16} />
-            </button>
+            </div> */}
           </div>
-          <article className="mt-3 whitespace-pre-wrap text-xl">
+          <article className="mt-3 whitespace-pre-wrap text-xl border border-gray-300 p-4 rounded m-2">
             {tweet.content}
           </article>
-          <time className="my-4 block text-sm text-gray-500">
+          {/* <time className="my-4 block text-sm text-gray-500">
             <TimeText date={tweet.createdAt} format="h:mm A · D MMM YYYY" />
-          </time>
-          <Separator />
-          <div className="my-2 flex items-center justify-between gap-4 text-gray-400">
-            <button className="rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <MessageCircle size={20} className="-scale-x-100" />
-            </button>
-            <button className="rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <Repeat2 size={22} />
-            </button>
+          </time> */}
+          <div className="my-2 flex items-center justify-end gap-4 text-gray-400">
             <LikeButton
               handle={handle}
               initialLikes={tweet.likes}
               initialLiked={tweet.liked}
               tweetId={tweet.id}
             />
-            <button className="rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <Share size={18} />
-            </button>
           </div>
           <Separator />
         </div>
-        <ReplyInput replyToTweetId={tweet.id} replyToHandle={tweet.handle} />
+        <ReplyInput replyToTweetId={tweet.id} usernameToReply={username} replyToHandle={tweet.handle} />
         <Separator />
         {replies.map((reply) => (
           <Tweet

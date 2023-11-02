@@ -43,15 +43,15 @@ export default function TweetInput() {
     <div className="flex gap-4" onClick={() => textareaRef.current?.focus()}>
       <UserAvatar className="h-12 w-12" />
       <div className="flex w-full flex-col px-2">
-        <button className="flex w-fit items-center rounded-full border-[1px] border-gray-300 px-2 text-sm font-bold text-brand">
+        {/* <button className="flex w-fit items-center rounded-full border-[1px] border-gray-300 px-2 text-sm font-bold text-brand">
           Everyone
           <ChevronDown size={16} className="text-gray-300" />
-        </button>
+        </button> */}
         <div className="mb-2 mt-6">
           <GrowingTextarea
             ref={textareaRef}
             className="bg-transparent outline-none placeholder:text-gray-500"
-            placeholder="What's happening?"
+            placeholder="活動標題"
           />
         </div>
         <Separator />

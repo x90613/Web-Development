@@ -67,6 +67,7 @@ export default function LikeButton({
           )}
         >
           <Check size={18} />
+          我想參加
         </div>       
       </button>
       {/* {likesCount === null ? 0 : likesCount}人參加 */}

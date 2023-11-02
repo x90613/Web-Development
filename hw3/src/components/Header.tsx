@@ -22,7 +22,12 @@ export default function Header() {
   return (
     // aside is a semantic html tag for side content
     <aside className="flex h-screen flex-col justify-between px-6 py-6">
-      <ProfileButton />
+      {/* <ProfileButton /> */}
+      <div
+        className="flex items-center gap-2 rounded-full p-20 text-start transition-colors duration-300 "
+      >
+        {/* 空的 <div>，不包含內容 */}
+      </div>
     </aside>
   );
 }

@@ -10,11 +10,13 @@ import { cn } from "@/lib/utils";
 
 type ReplyInputProps = {
   replyToTweetId: number;
+  usernameToReply?: string;
   replyToHandle: string;
 };
 
 export default function ReplyInput({
   replyToTweetId,
+  usernameToReply,
   replyToHandle,
 }: ReplyInputProps) {
   const { handle } = useUserInfo();
@@ -51,7 +53,7 @@ export default function ReplyInput({
     <div onClick={() => textareaRef.current?.focus()}>
       <div className="grid grid-cols-[fit-content(48px)_1fr] gap-4 px-4 pt-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <UserAvatar className="col-start-1 row-start-2 h-12 w-12" />
+        {/* <UserAvatar className="col-start-1 row-start-2 h-12 w-12" /> */}
         <p className="col-start-2 row-start-1 text-gray-500">
           Replying to <span className="text-brand">@{replyToHandle}</span>
         </p>
@@ -59,7 +61,7 @@ export default function ReplyInput({
           ref={textareaRef}
           wrapperClassName="col-start-2 row-start-2"
           className="bg-transparent text-xl outline-none placeholder:text-gray-500"
-          placeholder="Tweet your reply"
+          placeholder={`${usernameToReply}留下你的想法吧`}
         />
       </div>
       <div className="p-4 text-end">
