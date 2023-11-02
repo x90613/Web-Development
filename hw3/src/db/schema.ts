@@ -57,6 +57,9 @@ export const tweetsTable = pgTable(
       }),
     replyToTweetId: integer("reply_to_tweet_id"),
     createdAt: timestamp("created_at").default(sql`now()`),
+    // 新增 startDate 和 endDate 欄位
+    startDate: varchar("startDate", { length: 20 }),
+    endDate: varchar("endDate", { length: 20 }),
   },
   (table) => ({
     userHandleIndex: index("user_handle_index").on(table.userHandle),

@@ -72,6 +72,8 @@ export default async function TweetPage({
       content: tweetsTable.content,
       userHandle: tweetsTable.userHandle,
       createdAt: tweetsTable.createdAt,
+      startDate:tweetsTable.startDate,
+      endDate:tweetsTable.endDate,
     })
     .from(tweetsTable)
     .where(eq(tweetsTable.id, tweet_id_num))
@@ -134,6 +136,8 @@ export default async function TweetPage({
     likes: numLikes,
     createdAt: tweetData.createdAt,
     liked: Boolean(liked),
+    startDate:tweetData.startDate,
+    endDate:tweetData.endDate,
   };
 
   // The following code is almost identical to the code in src/app/page.tsx
@@ -195,6 +199,9 @@ export default async function TweetPage({
             <div className="p-4">
               {tweet.likes}人參加
             </div>
+          </div>
+          <div className="mt-3 whitespace-pre-wrap text-xl border border-gray-300 p-4 rounded m-2 flex">
+          From {tweet.startDate} to {tweet.endDate}
           </div>
         </div>
           <div className="my-2 mr-5 flex justify-end gap-4 text-gray-400">

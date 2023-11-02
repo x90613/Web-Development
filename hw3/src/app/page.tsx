@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
 import { likesTable, tweetsTable, usersTable } from "@/db/schema";
 import ProfileButton from "@/components/ProfileButton";
+import AddDialog from "@/components/AddDialog";
 
 type HomePageProps = {
   searchParams: {
@@ -146,13 +147,13 @@ export default async function Home({
         <div className="flex justify-end px-1 py-1">
         <ProfileButton />
         </div>
-        <div className="w-full px-4 pt-3">
+        {/* <div className="w-full px-4 pt-3">
           <TweetInput />
-        </div>
+        </div> */}
         {/* <button onClick={() => setOpen(true)}>
         </button>
         <AddDialog/> */}
-
+        <AddDialog />
         <Separator />
         {tweets.map((tweet) => (
           <Tweet
@@ -170,6 +171,7 @@ export default async function Home({
         ))}
       </div>
       <NameDialog />
+
     </>
   );
 }
