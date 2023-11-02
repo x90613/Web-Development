@@ -186,31 +186,18 @@ export default async function TweetPage({
           </Link>
           <h1 className="text-xl font-bold">揪團</h1>
         </div>
-        <div className="flex flex-col px-4 pt-3">
-          <div className="flex justify-between">
-            {/* <div className="flex w-full gap-3">
-              <img
-                src={getAvatar(tweet.username)}
-                alt="user avatar"
-                width={48}
-                height={48}
-                className="h-12 w-12 rounded-full"
-              />
-              <div>
-                <p className="font-bold">{tweet.username ?? "..."}</p>
-                <p className="font-normal text-gray-500">
-                  @{tweet.handle ?? "..."}
-                </p>
-              </div>
-            </div> */}
+        <div>
+          <div className="flex flex-col px-4 pt-3">
+          <div className="mt-3 whitespace-pre-wrap text-xl border border-gray-300 p-4 rounded m-2 flex">
+            <article className="flex-1 p-4">
+              {tweet.content}
+            </article>
+            <div className="p-4">
+              {tweet.likes}人參加
+            </div>
           </div>
-          <article className="mt-3 whitespace-pre-wrap text-xl border border-gray-300 p-4 rounded m-2">
-            {tweet.content}
-          </article>
-          {/* <time className="my-4 block text-sm text-gray-500">
-            <TimeText date={tweet.createdAt} format="h:mm A · D MMM YYYY" />
-          </time> */}
-          <div className="my-2 flex items-center justify-end gap-4 text-gray-400">
+        </div>
+          <div className="my-2 mr-5 flex justify-end gap-4 text-gray-400">
             <LikeButton
               handle={handle}
               initialLikes={tweet.likes}
@@ -220,7 +207,7 @@ export default async function TweetPage({
           </div>
           <Separator />
         </div>
-        <ReplyInput replyToTweetId={tweet.id} usernameToReply={username} replyToHandle={tweet.handle} />
+        <ReplyInput replyToTweetId={tweet.id} usernameToReply={username} replyToHandle={tweet.handle} initialLiked={tweet.liked}/>
         <Separator />
         {replies.map((reply) => (
           <Tweet

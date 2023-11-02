@@ -54,8 +54,8 @@ export default function LikeButton({
     <>
       <button
         className={cn(
-          "flex w-25 items-center gap-1 hover:text-brand",
-          liked && "text-brand",
+          "flex w-25 items-center gap-1 border border-gray-300 rounded hover:text-brand" ,
+          liked && "bg-green-300 text-black font-bold",
         )}
         onClick={handleClick}
         disabled={loading}
@@ -63,11 +63,11 @@ export default function LikeButton({
         <div
           className={cn(
             "flex items-center gap-1 rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10",
-            liked && "bg-brand/40",
+            
           )}
         >
-          <Check size={18} />
-          我想參加
+          {/* <Check size={18} /> */}
+          {liked?"我已參加":"我想參加"}
         </div>       
       </button>
       {/* {likesCount === null ? 0 : likesCount}人參加 */}
