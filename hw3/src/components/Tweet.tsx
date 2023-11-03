@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Check, MessageCircle, Repeat2, Share } from "lucide-react";
+import { Check } from "lucide-react";
 
 export type TweetProps = {
   username?: string;

@@ -3,7 +3,7 @@ import useUserInfo from '@/hooks/useUserInfo';
 //import type { TweetProps } from  "@/components/Tweet";
 import { useRouter } from 'next/navigation'
 import { useRef } from 'react';
-import { ClickAwayListener, Divider, Input } from "@mui/material";
+import { Input } from "@mui/material";
   
   export default function SearchBar() {
     const { username, handle } = useUserInfo();
@@ -19,14 +19,14 @@ import { ClickAwayListener, Divider, Input } from "@mui/material";
         router.push(`?username=${username}&handle=${handle}&search=${searchString.current.value}`); 
     }
 
-    const handleKeyPress = (event:any) => {
+    const handleKeyPress = (event:KeyboardEvent) => {
         if (event.key === 'Enter') {
           search();
         }
     }
 
   return(
-    <div className="">
+    <div className="border p-4 m-2">
         <div className="flex items-center justify-center">
             <Input
                 defaultValue={""}
@@ -34,7 +34,7 @@ import { ClickAwayListener, Divider, Input } from "@mui/material";
                 placeholder="SearchBar"
                 sx={{ fontSize: "2rem" }}
                 inputRef={searchString}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
             />
         </div>
         {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-xl"   style={{ width: '15%', marginLeft: 'auto' }}

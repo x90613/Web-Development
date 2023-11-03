@@ -75,9 +75,4 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
-  return new NextResponse("OK", { status: 200 });
-}
-
-export async function SEARCH(request: NextRequest) {
-  
 }

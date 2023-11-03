@@ -20,6 +20,7 @@ export default function LikeButton({
   tweetId,
   handle,
 }: LikeButtonProps) {
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const [liked, setLiked] = useState(initialLiked);
   const [likesCount, setLikesCount] = useState(initialLikes);
   const { likeTweet, unlikeTweet, loading } = useLike();
