@@ -1,7 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-
 import { z } from "zod";
-
 import { db } from "@/db";
 import { tweetsTable } from "@/db/schema";
 
@@ -66,8 +64,7 @@ export async function POST(request: NextRequest) {
       })
       .returning() // 擷取新插入行的 tweet_id
       .execute();
-
-      console.log(result[0].id.toString())
+      // console.log(result[0].id.toString())
       return new NextResponse(result[0].id.toString(), { status: 200 });
   } catch (error) {
     console.log("???")
@@ -79,4 +76,8 @@ export async function POST(request: NextRequest) {
     );
   }
   return new NextResponse("OK", { status: 200 });
+}
+
+export async function SEARCH(request: NextRequest) {
+  
 }

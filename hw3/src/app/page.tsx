@@ -8,11 +8,13 @@ import { db } from "@/db";
 import { likesTable, tweetsTable, usersTable } from "@/db/schema";
 import ProfileButton from "@/components/ProfileButton";
 import AddDialog from "@/components/AddDialog";
+import SearchBar from "@/components/SearchBar";
 
 type HomePageProps = {
   searchParams: {
     username?: string;
     handle?: string;
+    search?: string;
   };
 };
 
@@ -25,11 +27,12 @@ type HomePageProps = {
 // any where. There are already libraries that use react to render to the terminal,
 // email, PDFs, native mobile apps, 3D objects and even videos.
 export default async function Home({
-  searchParams: { username, handle },
+  searchParams: { username, handle, search},
 }: HomePageProps) {
   // read the username and handle from the query params and insert the user
   // if needed.
-
+  // const searchString = `%${search}%`
+  const searchString = search?`%${search}%`:`%%`
 
 
   if (username && handle) {
@@ -128,6 +131,7 @@ export default async function Home({
     })
     .from(tweetsTable)
     .where(isNull(tweetsTable.replyToTweetId))
+    .where(sql`content ILIKE ${searchString}`)
     .orderBy(desc(tweetsTable.createdAt))
     // JOIN is by far the most powerful feature of relational databases
     // it allows us to combine data from multiple tables into a single query
@@ -155,6 +159,8 @@ export default async function Home({
         <AddDialog/> */}
         <AddDialog />
         <Separator />
+        <SearchBar/>
+        <Separator />
         {tweets.map((tweet) => (
           <Tweet
             key={tweet.id}
@@ -171,7 +177,6 @@ export default async function Home({
         ))}
       </div>
       <NameDialog />
-
     </>
   );
 }

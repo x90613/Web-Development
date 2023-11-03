@@ -1,13 +1,13 @@
+"use client";
 import Link from "next/link";
-
 import { Check, MessageCircle, Repeat2, Share } from "lucide-react";
 
-type TweetProps = {
+export type TweetProps = {
   username?: string;
   handle?: string;
   id: number;
-  authorName: string;
-  authorHandle: string;
+  authorName?: string;
+  authorHandle?: string;
   content: string;
   likes: number;
   createdAt: Date;

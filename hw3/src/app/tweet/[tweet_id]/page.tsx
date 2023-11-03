@@ -28,7 +28,7 @@ type TweetPageProps = {
 // these two fields are always available in the props object of a page component
 export default async function TweetPage({
   params: { tweet_id },
-  searchParams: { username, handle },
+  searchParams: { username, handle},
 }: TweetPageProps) {
   // this function redirects to the home page when there is an error
   const errorRedirect = () => {

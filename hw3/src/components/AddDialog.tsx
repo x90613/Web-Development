@@ -33,7 +33,7 @@ export default function NameDialog() {
           setDialogOpen(true)
           handleFlag()
         }}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-xl"   style={{ width: '30%', marginLeft: 'auto' }}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-xl"   style={{ width: '15%', marginLeft: 'auto' }}
       >
         新增
       </Button>
