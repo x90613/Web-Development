@@ -1,7 +1,7 @@
 # Web Programming HW#3
 
 
-## creat .env.local File
+creat .env.local File
 ```
 POSTGRES_URL="postgres://postgres:postgres@localhost:5432/twitter"
 ```

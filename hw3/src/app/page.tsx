@@ -1,5 +1,5 @@
 
-import { eq, desc, isNull, sql } from "drizzle-orm";
+import { eq, desc, isNull, sql, and } from "drizzle-orm";
 
 import NameDialog from "@/components/NameDialog";
 import Tweet from "@/components/Tweet";
@@ -130,8 +130,9 @@ export default async function Home({
       liked: likedSubquery.liked,
     })
     .from(tweetsTable)
-    .where(isNull(tweetsTable.replyToTweetId))
-    .where(sql`content ILIKE ${searchString}`)
+    // .where(sql`content ILIKE ${searchString}`)
+    // .where(isNull(tweetsTable.replyToTweetId))
+    .where(sql`reply_to_tweet_id IS NULL AND content ILIKE ${searchString}`)
     .orderBy(desc(tweetsTable.createdAt))
     // JOIN is by far the most powerful feature of relational databases
     // it allows us to combine data from multiple tables into a single query
@@ -157,9 +158,9 @@ export default async function Home({
         {/* <button onClick={() => setOpen(true)}>
         </button>
         <AddDialog/> */}
+        <SearchBar/>
         <AddDialog />
         <Separator />
-        <SearchBar/>
         <Separator />
         {tweets.map((tweet) => (
           <Tweet
