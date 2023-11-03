@@ -27,7 +27,7 @@ export default function NameDialog() {
   }
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex w-full">
       <Button
         onClick={() => {
           setDialogOpen(true)
