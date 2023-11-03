@@ -3,7 +3,6 @@
 import { useState } from "react";
 import type { EventHandler, MouseEvent } from "react";
 
-import { Check, Heart } from "lucide-react";
 
 import useLike from "@/hooks/useLike";
 import { cn } from "@/lib/utils";

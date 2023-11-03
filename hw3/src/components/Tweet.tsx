@@ -2,13 +2,6 @@ import Link from "next/link";
 
 import { Check, MessageCircle, Repeat2, Share } from "lucide-react";
 
-import { Separator } from "@/components/ui/separator";
-import { cn, getAvatar } from "@/lib/utils";
-
-import LikeButton from "./LikeButton";
-import TimeText from "./TimeText";
-import Paper from "@mui/material/Paper";
-
 type TweetProps = {
   username?: string;
   handle?: string;
@@ -27,11 +20,8 @@ export default function Tweet({
   username,
   handle,
   id,
-  authorName,
-  authorHandle,
   content,
   likes,
-  createdAt,
   liked,
 }: TweetProps) {
   return (

@@ -7,7 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import useTweet from "@/hooks/useTweet";
 import useUserInfo from "@/hooks/useUserInfo";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation'
+import useLike from "@/hooks/useLike";
 
 export default function TweetInput() {
   const { username, handle } = useUserInfo();
@@ -15,6 +16,9 @@ export default function TweetInput() {
   const startareaRef = useRef<HTMLTextAreaElement>(null);
   const endareaRef = useRef<HTMLTextAreaElement>(null);
   const { postTweet, loading } = useTweet();
+  const router = useRouter();
+  const { likeTweet } = useLike();
+  
   const handleTweet = async () => {
     const content = textareaRef.current?.value;
     const startDate = startareaRef.current?.value;
@@ -38,15 +42,13 @@ export default function TweetInput() {
       textareaRef.current.dispatchEvent(
         new Event("input", { bubbles: true, composed: true }),
       );
-      console.log("ha",body.toString(),typeof(body.toString()))
-      // router.push({
-      //   pathname: `/tweet/${body.toString()}`,
-      //   query: {
-      //     username,
-      //     handle,
-      //   }
-      // });
-        
+
+      // like it and then go to new tweet!!!
+      await likeTweet({
+        tweetId: body,
+        userHandle: handle,
+      });
+      router.push(`tweet/${body}?username=${username}&handle=${handle}`);     
     } catch (e) {
       console.error(e);
       alert("Error posting tweet");
