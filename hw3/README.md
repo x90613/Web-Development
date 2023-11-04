@@ -9,6 +9,7 @@ POSTGRES_URL="postgres://postgres:postgres@localhost:5432/twitter"
 ```bash
 #init this project
 yarn
+yarn add @mui/material @emotion/react @emotion/styled
 
 #You can also run the following command to activate the changes to groups(it depends on your docker setting)
 newgrp docker
