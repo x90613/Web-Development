@@ -21,6 +21,7 @@ async function Navbar() {
   return (
     <nav className="flex w-full flex-col overflow-y-scroll bg-slate-100 pb-10">
       <nav className="sticky top-0 flex flex-col items-center justify-between border-b bg-slate-100 pb-2">
+        <h1 className="text-4xl font-bold text-blue-500">Messenger</h1>
         <div className="flex w-full items-center justify-between px-3 py-1">
           <div className="flex items-center gap-2">
             <RxAvatar />
@@ -53,7 +54,7 @@ async function Navbar() {
             className="flex w-full items-center gap-2 px-3 py-1 text-left text-sm text-slate-500"
           >
             <AiFillFileAdd size={16} />
-            <p>Create Document</p>
+            <p>Start a new chatroom !</p>
           </button>
         </form>
       </nav>

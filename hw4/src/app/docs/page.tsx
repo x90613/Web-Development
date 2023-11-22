@@ -6,7 +6,7 @@ function DocsPage() {
       <div className="flex flex-col items-center justify-center">
         <BiError className="text-yellow-500" size={80} />
         <p className="text-sm font-semibold text-slate-700">
-          Please select a document to edit
+          Please select a chatroom
         </p>
       </div>
     </div>

@@ -38,6 +38,7 @@ export const {
         },
       };
     },
+    // record third part signup info
     async jwt({ token, account }) {
       // Sign in with social account, e.g. GitHub, Google, etc.
       if (!account) return token;

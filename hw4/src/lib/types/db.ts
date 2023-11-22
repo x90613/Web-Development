@@ -10,3 +10,11 @@ export type Document = {
   title: string;
   content: string;
 };
+
+
+export type Message = {
+  id: string;
+  content: string;
+  toDoc: string; //mapping to Document
+  //deltomyself: boolean;
+};

@@ -29,6 +29,7 @@ export default CredentialsProvider({
     }
     const { email, username, password } = validatedCredentials;
 
+    // make sure the user is exist or not
     const [existedUser] = await db
       .select({
         id: usersTable.displayId,
@@ -59,11 +60,12 @@ export default CredentialsProvider({
       return {
         email: createdUser.email,
         name: createdUser.username,
-        id: createdUser.displayId,
+        id: createdUser.displayId, //detail!!! sending to frontend must use display.id 
       };
     }
 
     // Sign in
+    // tell you that your accout is github signup or credentials signup
     if (existedUser.provider !== "credentials") {
       console.log(`The email has registered with ${existedUser.provider}.`);
       return null;
