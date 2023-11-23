@@ -56,7 +56,9 @@ export default async function Navbar() {
             {
               // TODO: 7. Display user's name here
               // hint: line 14 of this file
-              `${userId}`
+              <h1 className="text-sm font-semibold">
+                {session?.user?.name ?? "User"}
+              </h1>
               // TODO: 7. end
             }
           </span>
