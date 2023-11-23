@@ -3,17 +3,9 @@
 import { signOut } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
+import { publicEnv } from "@/lib/env/public";
 
 export default function SignOutButton() {
-  const handleSignOut = async () => {
-    try {
-      // 調用 signOut 函數進行登出
-      await signOut();
-    } catch (error) {
-      console.error('Error signing out:', error);
-      // 處理登出過程中的錯誤
-    }
-  };
-  return <Button variant={"outline"} onClick={handleSignOut}>Sign Out</Button>;
+  return <Button  data-testid="sign-out-button" variant={"outline"}>Sign Out</Button>;
 }
 // TODO: 4. end
