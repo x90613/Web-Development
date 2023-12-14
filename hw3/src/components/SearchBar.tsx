@@ -19,7 +19,7 @@ import { Input } from "@mui/material";
         router.push(`?username=${username}&handle=${handle}&search=${searchString.current.value}`); 
     }
 
-    const handleKeyPress = (event:KeyboardEvent) => {
+    const handleKeyPress = (event:React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (event.key === 'Enter') {
           search();
         }
