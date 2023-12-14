@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { KeyboardEventHandler, useRef } from "react";
 
 import GrowingTextarea from "@/components/GrowingTextarea";
 import useTweet from "@/hooks/useTweet";
@@ -46,11 +46,17 @@ export default function ReplyInput({
     }
   };
 
-  const handleKeyPress = (event:KeyboardEvent) => {
+  const handleKeyPress: KeyboardEventHandler<HTMLDivElement> = (event) => {
+    // 您的按键处理逻辑
     if (event.key === 'Enter') {
       handleReply();
     }
-  }
+  };
+  // const handleKeyPress = (event:KeyboardEvent) => {
+    // if (event.key === 'Enter') {
+    //   handleReply();
+    // }
+  // }
 
 
   return (
