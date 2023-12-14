@@ -11,7 +11,8 @@ import { tasksTable, usersToProjectsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { publicEnv } from "@/lib/env/public";
 
-export async function getProject(projectId: string) {
+//export async function getProject(projectId: string) {
+export async function getProject() {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) {
