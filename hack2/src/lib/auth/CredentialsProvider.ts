@@ -52,8 +52,7 @@ export default CredentialsProvider({
         return null;
       }
       // TODO: 2.1 Hash password with bcrypt
-      // const hashedPassword = password; // change this line
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, 10); // change this line
       // TODO: 2.1 end
 
       const [createdUser] = await db
@@ -83,8 +82,7 @@ export default CredentialsProvider({
       return null;
     }
     // TODO: 2.2 Compare password with bcrypt
-    //const isValid = password === existedUser.hashedPassword; // change this line
-    const isValid = await bcrypt.compare(password, existedUser.hashedPassword);
+    const isValid = await bcrypt.compare(password, existedUser.hashedPassword); // change this line
     // TODO: 2.2 end
 
     if (!isValid) {

@@ -16,6 +16,7 @@ export default async function Navbar() {
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}`);
   }
   const projects = await getProjects(userId);
+  // const userName = session?.user?.name;
   return (
     <nav className="flex min-w-fit flex-col justify-between gap-2 overflow-hidden bg-gray-100">
       <div className="flex h-10 w-full flex-row items-center gap-12 px-6 py-8 pt-8">
@@ -56,9 +57,7 @@ export default async function Navbar() {
             {
               // TODO: 7. Display user's name here
               // hint: line 14 of this file
-              <h1 className="text-sm font-semibold">
-                {session?.user?.name ?? "User"}
-              </h1>
+              session.user.name
               // TODO: 7. end
             }
           </span>

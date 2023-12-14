@@ -11,8 +11,7 @@ import { tasksTable, usersToProjectsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { publicEnv } from "@/lib/env/public";
 
-//export async function getProject(projectId: string) {
-export async function getProject() {
+export async function getProject(projectId: string) {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) {
@@ -22,8 +21,10 @@ export async function getProject() {
   const userToProject = await db.query.usersToProjectsTable.findFirst({
     // TODO: 8. Select the correct project by userId and projectId
     where: and(
+      eq(usersToProjectsTable.projectId, projectId),
       eq(usersToProjectsTable.userId, userId),
     ),
+
     // TODO: 8. end
     columns: {},
     with: {
@@ -103,6 +104,12 @@ export async function updateTaskComplete(
   });
 
   // TODO: 9. Update the task's `completed` column
+  // 當使用者勾選該 task 後，在 database 更新 task （十行以內） 
+  await db
+    .update(tasksTable)
+    .set({ completed }) // Update the completed column
+    .where(eq(tasksTable.displayId, taskId)) // Specify the task to update
+    .execute();
 
   // TODO: 9. end
 
@@ -121,7 +128,7 @@ export async function deleteTask(taskId: string, projectId: string) {
   });
 
   // TODO: 10. Delete the task whose displayId is `taskId`
-
+  db.delete(tasksTable).where(eq(tasksTable.displayId, taskId)).execute();
   // TODO: 10. end
 
   revalidatePath(`/projects/${projectId}`);

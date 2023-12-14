@@ -9,6 +9,7 @@ const privateEnvSchema = z.object({
 type PrivateEnv = z.infer<typeof privateEnvSchema>;
 
 export const privateEnv: PrivateEnv = {
+
   // TODO: 1.3 Add your private environment variables here for your database (postgres)
   POSTGRES_URL: process.env.POSTGRES_URL!,
   // TODO: 1.3 end
