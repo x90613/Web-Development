@@ -75,7 +75,7 @@ function App() {
     init();
   }, []);
 
-  // 4APIs to backend
+  // 4APIs(CRUD) to backend
   async function getTodos() {
     const response = await instance.get("/todos");
     return response.data;
@@ -173,7 +173,8 @@ function App() {
               completeTodo(todo.id!, newTodo)}
             onDelete={() => deleteTodo(todo.id!)}
           />
-        ))}
+          ))
+        }
       </section>
     </>
   );
