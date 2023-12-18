@@ -2,6 +2,9 @@
 
 ## Run the project
 
+final is easy.
+
+
 ***Modified from Notion Clone***
 
 1. Install dependencies
