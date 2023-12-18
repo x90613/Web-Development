@@ -10,37 +10,36 @@ import { authSchema } from "@/validators/auth";
 export default CredentialsProvider({
   name: "credentials",
   credentials: {
-    email: { label: "Email", type: "text" },
-    username: { label: "Userame", type: "text", optional: true },
+    username: { label: "Userame", type: "text" },
     password: { label: "Password", type: "password" },
   },
   async authorize(credentials) {
     let validatedCredentials: {
-      email: string;
-      username?: string;
+      username: string;
       password: string;
     };
 
     try {
       validatedCredentials = authSchema.parse(credentials);
     } catch (error) {
+      console.log(credentials);
+      console.log(error);
       console.log("Wrong credentials. Try again.");
       return null;
     }
-    const { email, username, password } = validatedCredentials;
+    const { username, password } = validatedCredentials;
 
-    // make sure the user is exist or not
     const [existedUser] = await db
       .select({
         id: usersTable.displayId,
         username: usersTable.username,
-        email: usersTable.email,
         provider: usersTable.provider,
         hashedPassword: usersTable.hashedPassword,
       })
       .from(usersTable)
-      .where(eq(usersTable.email, validatedCredentials.email.toLowerCase()))
+      .where(eq(usersTable.username, validatedCredentials.username))
       .execute();
+
     if (!existedUser) {
       // Sign up
       if (!username) {
@@ -52,20 +51,17 @@ export default CredentialsProvider({
         .insert(usersTable)
         .values({
           username,
-          email: email.toLowerCase(),
           hashedPassword,
           provider: "credentials",
         })
         .returning();
       return {
-        email: createdUser.email,
         name: createdUser.username,
-        id: createdUser.displayId, //detail!!! sending to frontend must use display.id 
+        id: createdUser.displayId,
       };
     }
 
     // Sign in
-    // tell you that your accout is github signup or credentials signup
     if (existedUser.provider !== "credentials") {
       console.log(`The email has registered with ${existedUser.provider}.`);
       return null;
@@ -80,8 +76,8 @@ export default CredentialsProvider({
       console.log("Wrong password. Try again.");
       return null;
     }
+
     return {
-      email: existedUser.email,
       name: existedUser.username,
       id: existedUser.id,
     };

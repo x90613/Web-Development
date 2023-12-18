@@ -15,17 +15,18 @@ export const {
   providers: [GitHub, CredentialsProvider],
   callbacks: {
     async session({ session, token }) {
-      const email = token.email || session?.user?.email;
-      if (!email) return session;
+      const username = token.name || session?.user?.username;
+      if (!username) return session;
       const [user] = await db
         .select({
           id: usersTable.displayId,
           username: usersTable.username,
           provider: usersTable.provider,
-          email: usersTable.email,
+          // email: usersTable.email,
         })
         .from(usersTable)
-        .where(eq(usersTable.email, email.toLowerCase()))
+        // .where(eq(usersTable.email, email.toLowerCase()))
+        .where(eq(usersTable.username, username))
         .execute();
 
       return {
@@ -33,18 +34,17 @@ export const {
         user: {
           id: user.id,
           username: user.username,
-          email: user.email,
+          // email: user.email,
           provider: user.provider,
         },
       };
     },
-    // record third part signup info
     async jwt({ token, account }) {
       // Sign in with social account, e.g. GitHub, Google, etc.
       if (!account) return token;
-      const { name, email } = token;
+      const { name } = token;
       const provider = account.provider;
-      if (!name || !email || !provider) return token;
+      if (!name || !provider) return token;
 
       // Check if the email has been registered
       const [existedUser] = await db
@@ -52,7 +52,8 @@ export const {
           id: usersTable.displayId,
         })
         .from(usersTable)
-        .where(eq(usersTable.email, email.toLowerCase()))
+        // .where(eq(usersTable.email, email.toLowerCase()))
+        .where(eq(usersTable.username, name))
         .execute();
       if (existedUser) return token;
       if (provider !== "github") return token;
@@ -60,7 +61,7 @@ export const {
       // Sign up
       await db.insert(usersTable).values({
         username: name,
-        email: email.toLowerCase(),
+        // email: email.toLowerCase(),
         provider,
       });
 
