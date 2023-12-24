@@ -6,8 +6,8 @@ import {
   uuid,
   varchar,
   date,
-  unique,
   time,
+  unique,
 } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable(
@@ -30,11 +30,11 @@ export const usersTable = pgTable(
   }),
 );
 
-// TravelCards (e.g. PlanA, PlanB)
-// usersTable is many-to-many relationship with TravelCards
+// Plans (e.g., PlanA, PlanB)
+// usersTable is many-to-many relationship with Plans
 
-export const travelCardsTable = pgTable(
-  "travel_cards",
+export const plansTable = pgTable(
+  "plans",
   {
     id: serial("id").primaryKey(),
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
@@ -46,8 +46,8 @@ export const travelCardsTable = pgTable(
   }),
 );
 
-// journeysTable (e.g. journey1, journey2)
-// travelCardsTable is one-to-many relationship with journeysTable
+// journeysTable (e.g., journey1, journey2)
+// plansTable is one-to-many relationship with journeysTable
 export const journeysTable = pgTable(
   "journeys",
   {
@@ -59,8 +59,8 @@ export const journeysTable = pgTable(
     date: date("date", { mode: "date" }).notNull(), // only date, no time
     time1: time("time1"), // only time, no date (start time), sorted by time1
     time2: time("time2"), // only time, no date (end time)
-    travelCardsId: uuid("travel_cards_id")
-      .references(() => travelCardsTable.displayId, {
+    plansId: uuid("plans_id")
+      .references(() => plansTable.displayId, {
         onDelete: "cascade",
         onUpdate: "cascade",
       })
@@ -71,13 +71,13 @@ export const journeysTable = pgTable(
   }),
 );
 
-export const travelCardsUsersTable = pgTable(
-  "travel_cards_users",
+export const plansUsersTable = pgTable(
+  "plans_users",
   {
     id: serial("id").primaryKey(),
-    travelCardId: uuid("travel_card_id")
+    planId: uuid("plan_id")
       .notNull()
-      .references(() => travelCardsTable.displayId, {
+      .references(() => plansTable.displayId, {
         onDelete: "cascade",
         onUpdate: "cascade",
       }),
@@ -89,46 +89,45 @@ export const travelCardsUsersTable = pgTable(
       }),
   },
   (table) => ({
-    travelCardAndUserIndex: index("travel_card_and_user_index").on(
-      table.travelCardId,
+    planAndUserIndex: index("plan_and_user_index").on(
+      table.planId,
       table.userId,
     ),
-    // This is a unique constraint on the combination of travelCardId and userId.
+    // This is a unique constraint on the combination of planId and userId.
     // This ensures that there is no duplicate entry in the table.
-    uniqCombination: unique().on(table.travelCardId, table.userId),
+    uniqCombination: unique().on(table.planId, table.userId),
   }),
 );
 
 // Relations
 
 export const usersRelations = relations(usersTable, ({ many }) => ({
-  travelCardsUsersTable: many(travelCardsUsersTable),
+  plansUsersTable: many(plansUsersTable),
 }));
 
-export const travelCardsRelations = relations(travelCardsTable, ({ many }) => ({
+export const plansRelations = relations(plansTable, ({ many }) => ({
   journeys: many(journeysTable),
-  travelCardsUsersTable: many(travelCardsUsersTable),
+  plansUsersTable: many(plansUsersTable),
 }));
 
-export const travelCardsUsersRelations = relations(
-  travelCardsUsersTable,
+export const plansUsersRelations = relations(
+  plansUsersTable,
   ({ one }) => ({
     usersTable: one(usersTable, {
-      fields: [travelCardsUsersTable.userId],
+      fields: [plansUsersTable.userId],
       references: [usersTable.displayId],
     }),
 
-    travelCardsTable: one(travelCardsTable, {
-      fields: [travelCardsUsersTable.travelCardId],
-      references: [travelCardsTable.displayId],
+    plansTable: one(plansTable, {
+      fields: [plansUsersTable.planId],
+      references: [plansTable.displayId],
     }),
   }),
 );
 
-
 export const journeysRelations = relations(journeysTable,({one}) => ({
-  travelCardsTable: one(travelCardsTable, {
-    fields: [journeysTable.travelCardsId],
-    references: [travelCardsTable.displayId],
+  plansTable: one(plansTable, {
+    fields: [journeysTable.plansId],
+    references: [plansTable.displayId],
   }),
-}))
+}));
