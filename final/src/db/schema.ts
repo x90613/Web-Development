@@ -56,9 +56,8 @@ export const journeysTable = pgTable(
     title: varchar("title", { length: 100 }).notNull(),
     note: varchar("note", { length: 100 }).notNull(),
     location: varchar("location", { length: 100 }).notNull(),
-    date: date("date", { mode: "date" }).notNull(), // only date, no time
-    time1: time("time1"), // only time, no date (start time), sorted by time1
-    time2: time("time2"), // only time, no date (end time)
+    time1: date("time1"), // only time, no date (start time), sorted by time1
+    time2: date("time2"), // only time, no date (end time)
     plansId: uuid("plans_id")
       .references(() => plansTable.displayId, {
         onDelete: "cascade",
