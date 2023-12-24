@@ -4,7 +4,7 @@ import { and, eq } from "drizzle-orm";
 import Pusher from "pusher";
 
 import { db } from "@/db";
-import { journeysTable, travelCardsTable } from "@/db/schema";
+import { journeysTable, travelCardsTable } from "@/db/schema3";
 import { auth } from "@/lib/auth";
 import { privateEnv } from "@/lib/env/private";
 import { publicEnv } from "@/lib/env/public";

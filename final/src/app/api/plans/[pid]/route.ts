@@ -3,10 +3,10 @@ import { NextResponse, type NextRequest } from "next/server";
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { travelCardsTable, journeysTable } from "@/db/schema";
+import { plansTable, journeysTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
-// DELETE /api/travelcards/:tid
+// DELETE /api/travelcards/:pid
 export async function DELETE(
   req: NextRequest,
   {
@@ -26,8 +26,8 @@ export async function DELETE(
 
     // 執行刪除操作
     const result = await db
-      .delete(travelCardsTable)
-      .where(eq(travelCardsTable.displayId, params.tid))
+      .delete(plansTable)
+      .where(eq(plansTable.displayId, params.tid))
       .execute();
 
     // 檢查是否有記錄被刪除
@@ -57,7 +57,7 @@ export async function GET(
     params,
   }: {
     params: {
-      tid: string;
+      pid: string;
     };
   },
 ) {
@@ -69,7 +69,7 @@ export async function GET(
     }
 
     const dbJourneys = await db.query.journeysTable.findMany({
-      where: eq(journeysTable.travelCardsId, params.tid),
+      where: eq(journeysTable.plansId, params.pid),
       with: {
         
       },

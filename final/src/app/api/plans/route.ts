@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import Pusher from "pusher";
 
 import { db } from "@/db";
-import { travelCardsTable, travelCardsUsersTable } from "@/db/schema";
+import { plansTable, plansUsersTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { privateEnv } from "@/lib/env/private";
 import { publicEnv } from "@/lib/env/public";
@@ -20,10 +20,10 @@ export async function GET(req: NextRequest) {
     }
     const userId = session.user.id;
 
-    const dbTravelCards = await db.query.travelCardsUsersTable.findMany({
-      where: eq(travelCardsUsersTable.userId, userId),
+    const dbTravelCards = await db.query.plansUsersTable.findMany({
+      where: eq(plansUsersTable.userId, userId),
       with: {
-        travelCardsTable: {
+        plansTable: {
           columns: {
             displayId: true,
             title: true,
@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     // create new travelcard
     const [newTravelCard] = await db
-      .insert(travelCardsTable)
+      .insert(plansTable)
       .values({
         title: body.title,
         description: body.description,
