@@ -4,7 +4,7 @@ import GitHub from "next-auth/providers/github";
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { usersTable } from "@/db/schema";
+import { usersTable } from "@/db/schema3";
 
 import CredentialsProvider from "./CredentialsProvider";
 

@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { usersTable } from "@/db/schema";
+import { usersTable } from "@/db/schema3";
 import { authSchema } from "@/validators/auth";
 
 export default CredentialsProvider({
