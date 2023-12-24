@@ -19,14 +19,14 @@ import Typography from "@mui/material/Typography";
 // this pattern is called discriminated type unions
 // you can read more about it here: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
 // or see it in action: https://www.typescriptlang.org/play#example/discriminate-types
-type NewTaskDialogProps = {
+type NewJourneyDialogProps = {
   variant: "new";
   open: boolean;
   onClose: () => void;
   // listId: string;
 };
 
-type EditTaskDialogProps = {
+type EditJourneyDialogProps = {
   variant: "edit";
   open: boolean;
   onClose: () => void;
@@ -40,9 +40,9 @@ type EditTaskDialogProps = {
   note: string;
 };
 
-type TaskDialogProps = NewTaskDialogProps | EditTaskDialogProps;
+type JourneyDialogProps = NewJourneyDialogProps | EditJourneyDialogProps;
 
-export default function TaskDialog(props: TaskDialogProps) {
+export default function JourneyDialog(props: JourneyDialogProps) {
   const { variant, open, onClose, listId } = props;
   const title = variant === "edit" ? props.title : "";
   const start = variant === "edit" ? props.start : "";
@@ -135,7 +135,7 @@ export default function TaskDialog(props: TaskDialogProps) {
               defaultValue={title}
               onChange={(e) => setNewTitle(e.target.value)}
               className="grow"
-              placeholder="Enter a title for this card..."
+              placeholder="Enter a title for this Journey..."
             />
           </ClickAwayListener>
         ) : (

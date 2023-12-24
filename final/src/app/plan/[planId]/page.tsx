@@ -1,6 +1,6 @@
 "use client";
 
-import PlanMainBar from "@/components/PlanMainBar";
+import PlanBar from "@/components/PlanBar";
 
 //import MessengerBar from "@/components/MessengerBar";
 
@@ -8,7 +8,7 @@ import PlanMainBar from "@/components/PlanMainBar";
 export default function ChatPage() {
   return (
     <div>
-      <PlanMainBar />
+      <PlanBar/>
     </div>
   );
 }

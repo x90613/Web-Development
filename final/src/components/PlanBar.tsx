@@ -8,7 +8,7 @@ import MessageInput from "@/components/MessageInput";
 import MessagesViewer from "@/components/MessagesViewr";
 import { useChat } from "@/hooks/useChat";
 import Task from "@/components/Task";
-import TaskDialog from "./TaskDialog";
+import TaskDialog from "./JourneyDialog";
 import { useState } from "react";
 
 export default function MessengerBar() {

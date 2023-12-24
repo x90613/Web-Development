@@ -1,7 +1,7 @@
 "use client";
 
 import AuthBar from "@/components/AuthBar";
-import ChatroomsBar from "@/components/ChatroomsBar";
+import ChatroomsBar from "@/components/PlanListBar";
 import { ChatProvider } from "@/hooks/useChat";
 
 type Props = {
@@ -16,9 +16,9 @@ function DocsLayout({ children }: Props) {
         <nav className="flex w-1/5 flex-col overflow-y-scroll border-r bg-slate-100 pb-10">
           <AuthBar />
         </nav>
-        <nav className="flex w-2/5 flex-col overflow-y-scroll border-r bg-slate-100 pb-10">
+        {/* <nav className="flex w-2/5 flex-col overflow-y-scroll border-r bg-slate-100 pb-10">
           <ChatroomsBar />
-        </nav>
+        </nav> */}
         <div className="w-full overflow-y-scroll">{children}</div>
       </ChatProvider>
     </main>

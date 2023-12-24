@@ -20,7 +20,7 @@ import { Label } from "@/components/ui/label";
 
 import useChatrooms from "@/hooks/useChatrooms";
 
-export default function AddChatroomButton() {
+export default function AddPlanButton() {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 
