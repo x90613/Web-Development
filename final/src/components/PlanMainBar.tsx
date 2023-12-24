@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 
 import MessageInput from "@/components/MessageInput";
 import MessagesViewer from "@/components/MessagesViewr";
-import Button from "@mui/material/Button";
 import { useChat } from "@/hooks/useChat";
 import Task from "@/components/Task";
 import TaskDialog from "./TaskDialog";
