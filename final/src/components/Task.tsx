@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TaskDialog from './TaskDialog';
+import TaskDialog from './JourneyDialog';
 
 export type TaskProps = {
   title: string;

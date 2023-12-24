@@ -8,7 +8,7 @@ import PlanBar from "@/components/PlanBar";
 export default function ChatPage() {
   return (
     <div>
-      <PlanBar />
+      <PlanBar/>
     </div>
   );
 }

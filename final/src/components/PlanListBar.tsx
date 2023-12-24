@@ -7,12 +7,12 @@ import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-import AddChatroomButton from "@/components/AddChatroomButton";
+import AddPlanButton from "@/components/AddPlanButton";
 import ChatroomItem from "@/components/ChatroomItem";
 import SearchBar from "@/components/SearchBar";
 import useChatrooms from "@/hooks/useChatrooms";
 
-export default function ChatroomsBar() {
+export default function PlanListBar() {
   const { chatrooms, addChatroom } = useChatrooms();
   const { data: session } = useSession();
   const userId = session?.user?.id;
@@ -56,7 +56,7 @@ export default function ChatroomsBar() {
       const tmp = new URLSearchParams(searchParams);
       tmp.delete("search");
 
-      router.push(`/chat/${chatId}`);
+      router.push(`/plan/${chatId}`);
     } catch (e) {
       console.error(e);
       alert(e);
@@ -67,9 +67,9 @@ export default function ChatroomsBar() {
     <>
       <div className="flex flex-col">
         <div className="m-1 flex flex-row items-center">
-          <span className="w-full p-3 px-4 text-2xl font-bold">Chat</span>
+          <span className="w-full p-3 px-4 text-2xl font-bold">PlanList</span>
           <div className="">
-            <AddChatroomButton />
+            <AddPlanButton />
           </div>
         </div>
         <SearchBar />

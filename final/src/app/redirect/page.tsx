@@ -30,11 +30,11 @@ export default async function RedirectPage() {
 
       // redirect
       // redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/chat/${firstChatroomId}`);
-      redirect(`/chat/${firstChatroomId}`)
+      redirect(`/plan/${firstChatroomId}`)
       // router.push(`/chat/${firstChatroomId}`);
     } catch (e) {
       // redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/chat`);
-      redirect(`/chat`)
+      redirect(`/plan`)
       // router.push(`/chat`);
     }
   };
