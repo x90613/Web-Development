@@ -62,7 +62,7 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
     await fetchPlan();
     // if current Plan is deleted, redirect to home page
     if (needToRedirect) {
-      router.push("/plans");
+      router.push("/plan");
     }
   };
 
