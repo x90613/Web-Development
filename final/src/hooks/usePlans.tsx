@@ -116,7 +116,7 @@ export function PlansProvider({ children }: { children: React.ReactNode }) {
     return data;
   };
 
-  const sharePlan = async(planId:string, email: string) => {
+  const sharePlan = async (planId: string, email: string) => {
     const res = await fetch(`/api/plans/${planId}`, {
       method: "PUT",
       headers: {
@@ -133,7 +133,7 @@ export function PlansProvider({ children }: { children: React.ReactNode }) {
     const data = await res.json();
     await fetchPlans(); // 同時會觸發相依的useEffect()
     return data;
-  }
+  };
 
   return (
     <PlansContext.Provider

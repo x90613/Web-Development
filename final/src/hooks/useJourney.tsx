@@ -203,7 +203,7 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   };
 
   const exportJourney = async () => {
-    const res = await fetch("/api/journeys/export", {
+    await fetch("/api/journeys/export", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

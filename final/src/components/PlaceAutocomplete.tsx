@@ -33,7 +33,7 @@ const PlaceAutocomplete = forwardRef<HTMLInputElement, PlaceAutocompleteProps>(
           setAutocomplete(autocompleteInstance);
         }
       });
-    }, [ref, onPlaceSelected]);
+    }, [ref, onPlaceSelected, autocomplete]);
 
     return (
       <input

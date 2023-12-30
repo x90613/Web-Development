@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { useSession } from "next-auth/react";
-
+// import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 
 import {
@@ -24,8 +23,8 @@ type Props = {
 };
 
 export default function JourneyViewer({ journeys }: Props) {
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
+  // const { data: session } = useSession();
+  // const userId = session?.user?.id;
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
