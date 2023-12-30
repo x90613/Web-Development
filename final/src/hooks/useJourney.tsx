@@ -63,7 +63,7 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     }
     const data = await ret.json();
     setJourneys(data.journeys);
-  }, [planId]);
+  }, [planId, router]);
 
   useEffect(() => {
     if (!planId) return;
