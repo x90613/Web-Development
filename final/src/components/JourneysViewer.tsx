@@ -37,11 +37,7 @@ export default function JourneyViewer({ journeys }: Props) {
     <div className="grow overflow-y-scroll">
       <div className="px-2 pl-20 pt-4">
         {journeys.map((journey: { journeyId: any }) => (
-          <JourneyItem
-            journey={journey}
-            userId={userId}
-            key={journey.journeyId}
-          />
+          <JourneyItem journey={journey} key={journey.journeyId} />
         ))}
       </div>
       <div ref={scrollRef}></div>
@@ -58,7 +54,7 @@ function JourneyItem({ journey }: { journey: any }) {
   const endRef = useRef<HTMLInputElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
   const noteRef = useRef<HTMLInputElement>(null);
-  const handlePlaceSelect = (place) => {
+  const handlePlaceSelect = (place: any) => {
     // 更新 locationRef 的值
     if (locationRef.current) {
       locationRef.current.value = place.formatted_address;
