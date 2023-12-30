@@ -143,6 +143,7 @@ export default function AddJourneyButton() {
               location
             </Label>
             <PlaceAutocomplete
+              location=""
               ref={locationRef}
               onPlaceSelected={handlePlaceSelect}
             />

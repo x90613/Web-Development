@@ -47,5 +47,5 @@ const PlaceAutocomplete = forwardRef<HTMLInputElement, PlaceAutocompleteProps>(
   },
 );
 
-PlaceAutocomplete.displayName = 'PlaceAutocomplete';
+PlaceAutocomplete.displayName = "PlaceAutocomplete";
 export default PlaceAutocomplete;
