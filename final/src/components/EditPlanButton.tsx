@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { FcMenu } from "react-icons/fc";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -53,7 +54,6 @@ export default function EditPlanButton() {
         return false;
       }
 
-
       setModalOpen(false);
     } catch (e) {
       console.error(e);
@@ -71,9 +71,7 @@ export default function EditPlanButton() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit the plan</DialogTitle>
-          <DialogDescription>
-            Edit a new plan! Please enter the plan name & the description.
-          </DialogDescription>
+          <DialogDescription></DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-2">
           <div className="grid grid-cols-4 items-center gap-4">

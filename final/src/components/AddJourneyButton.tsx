@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { LuPlus } from "react-icons/lu";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,7 +28,7 @@ export default function AddJourneyButton() {
   const locationRef = useRef<HTMLInputElement>(null);
   const noteRef = useRef<HTMLInputElement>(null);
 
-  const handlePlaceSelect = (place) => {
+  const handlePlaceSelect = (place: any) => {
     // 更新 locationRef 的值
     if (locationRef.current) {
       locationRef.current.value = place.formatted_address;

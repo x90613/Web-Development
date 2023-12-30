@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+
 import { useSession } from "next-auth/react";
+
 import { motion } from "framer-motion";
 
 import {
@@ -47,11 +49,7 @@ export default function JourneyViewer({ journeys }: Props) {
   );
 }
 
-function JourneyItem({
-  journey,
-}: {
-  journey: any;
-}) {
+function JourneyItem({ journey }: { journey: any }) {
   const [modalOpen, setModalOpen] = useState(false);
   const { deleteJourney, updateJourney } = useJourney();
 
@@ -225,6 +223,7 @@ function JourneyItem({
   return (
     <>
       <motion.div
+        className="flex w-1/2"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 1.05 }}
         drag="x"
@@ -234,9 +233,9 @@ function JourneyItem({
           onClick={() => {
             setModalOpen(true);
           }}
-          className="flex w-1/2 pt-1"
+          className="flex  pt-1"
         >
-          <div key={"dm1"} className="w-full pt-1">
+          <div key={"dm1"} className=" pt-1">
             <div className={`flex flex-row items-end gap-2`}>
               <button className="relative m-7 w-full rounded-lg border-2 border-black  p-4  shadow-2xl">
                 <div className="flex items-start justify-between">

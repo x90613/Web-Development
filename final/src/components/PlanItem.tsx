@@ -52,7 +52,7 @@ export default function PlanItem({ planId, name, description }: PlanItemProps) {
         <DialogHeader>
           <DialogTitle>Delete a plan</DialogTitle>
           <DialogDescription>
-            Note that this action is irreversible.
+            Press the button below to delete the plan.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -83,7 +83,6 @@ export default function PlanItem({ planId, name, description }: PlanItemProps) {
               currentPlanId === planId ? "bg-yellow-200" : "bg-yellow-50"
             } p-4 px-4 transition-colors ${
               currentPlanId === planId ? "" : "hover:bg-yellow-100"
-
             }`}
             href={{
               pathname: `/plan/${planId}`,
