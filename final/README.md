@@ -53,8 +53,9 @@
 
 
 ### 系統畫面
+![Picture1](https://github.com/x90613/wp1121/assets/100923612/54eded7d-b25d-482d-b711-c68b5bc21ef6)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/4e34955c-9579-411b-9ff0-40867fade836/2382b9b8-81e8-4b3a-be39-427f57f309f9/Untitled.png)
+
 1. 可以新增Plan
 2. 在這裡可以選擇要編輯的Plan
 3. 之後還是可以修改Plan的name以及description
