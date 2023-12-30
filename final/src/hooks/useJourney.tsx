@@ -41,7 +41,7 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!planId) return;
-    const plan = plans.find((plan) => plan.planId === planId);
+    const plan = plans.find((plan: any) => plan.planId === planId);
 
     setCurrentPlan(plan);
   }, [planId, plans]);
