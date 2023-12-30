@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-import CredentialsProvider from "./CredentialsProvider";
+
 
 export const {
   handlers: { GET, POST },
@@ -27,7 +27,7 @@ export const {
       },
     }),
     GitHub,
-    CredentialsProvider,
+    
   ],
   callbacks: {
     async jwt({ token, account }) {
