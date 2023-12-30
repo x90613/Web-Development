@@ -67,5 +67,5 @@
 
 ## 組員之負責項目
 
-r12944038 前端初步建構、後端、API、useContext
-r12944044 前端、UI/UX、OAuth登入、GoogleCalender、GoogleMap串接
+1. r12944038 前端初步建構、後端、API、useContext
+2. r12944044 前端、UI/UX、OAuth登入、GoogleCalender、GoogleMap串接
